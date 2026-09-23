@@ -1,0 +1,140 @@
+/*!
+mana (library)
+
+\author	Shun Moriya
+\date	2003-
+*/
+
+#pragma once
+#include "Buffer.h"
+#include <bitset>
+#include <functional>
+#include <memory>
+#include <unordered_map>
+
+namespace mana
+{
+	class Actor;
+	class Plugin;
+
+    class VM final : Noncopyable, public std::enable_shared_from_this<VM>
+	{
+		friend class Actor;
+
+		static constexpr uint32_t Nil = static_cast<uint32_t>(~0);
+
+	public:
+		using ExternalFunctionType = std::function<void(const std::shared_ptr<Actor>& actor, void* structPointer)>;
+
+	public:
+		VM() = default;
+		VM(const VM&) = delete;
+		VM(VM&&) noexcept = delete;
+		VM& operator=(const VM&) = delete;
+		VM& operator=(VM&&) noexcept = delete;
+		~VM();
+		
+		void LoadPlugin(const std::string& filename);
+		void LoadPlugins(const std::string& directoryName);
+
+		void RegisterFunction(const std::string& name, const ExternalFunctionType& function);
+		//! Register C++ member functions without writing a manual wrapper. The method signature must match ExternalFunctionType.
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, T* instance, void (T::*method)(const std::shared_ptr<Actor>&, void*));
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, const T* instance, void (T::*method)(const std::shared_ptr<Actor>&, void*) const);
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, const std::shared_ptr<T>& instance, void (T::*method)(const std::shared_ptr<Actor>&, void*));
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, const std::shared_ptr<T>& instance, void (T::*method)(const std::shared_ptr<Actor>&, void*) const);
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, const std::weak_ptr<T>& instance, void (T::*method)(const std::shared_ptr<Actor>&, void*));
+		template <class T>
+		void RegisterMemberFunction(const std::string& name, const std::weak_ptr<T>& instance, void (T::*method)(const std::shared_ptr<Actor>&, void*) const);
+
+		void LoadProgram(const std::string& path);
+		void LoadProgram(const std::shared_ptr<const void>& program);
+		void UnloadProgram();
+				
+		void Restart();
+		bool Run();
+		[[nodiscard]] bool IsRunning() const;
+
+		void Execute(const std::function<void()>& function);
+
+		void RequestAll(const int32_t level, const char* actionName, const std::shared_ptr<Actor>& sender) const;
+		bool Request(const int32_t level, const char* actorName, const char* actionName, const std::shared_ptr<Actor>& sender);
+		void YieldAll() const;
+		[[nodiscard]] std::shared_ptr<Actor> FindActor(const char* name);
+		[[nodiscard]] std::string_view GetActorName(const std::shared_ptr<Actor>& actor) const;
+		[[nodiscard]] std::shared_ptr<Actor> CloneActor(const std::shared_ptr<Actor>& actor, const char* newName);
+		[[nodiscard]] std::shared_ptr<Actor> CreateActor(const char* name, const char* newName);
+		[[nodiscard]] std::shared_ptr<Actor> CreateActorFromPhantom(const char* name, const char* newName);
+		[[nodiscard]] bool IsInInitAction() const;
+		[[nodiscard]] bool IsFinishInitAction() const;
+		
+		void SetSystemRequest(const bool enable);
+		[[nodiscard]] bool IsSystemRequestEnabled() const;
+		
+		[[nodiscard]] uint32_t GetFrameCounter() const;
+		[[nodiscard]] float_t GetDeltaTime() const;
+		[[nodiscard]] bool IsFrameChanged() const;
+	private:
+		[[nodiscard]] int8_t GetInt8FromMemory(const uint32_t address) const;
+		[[nodiscard]] uint8_t GetUint8FromMemory(const uint32_t address) const;
+		[[nodiscard]] int16_t GetInt16FromMemory(const uint32_t address) const;
+		[[nodiscard]] uint16_t GetUint16FromMemory(const uint32_t address) const;
+		[[nodiscard]] int32_t GetInt32FromMemory(const uint32_t address) const;
+		[[nodiscard]] uint32_t GetUint32FromMemory(const uint32_t address) const;
+		[[nodiscard]] float GetFloatFromMemory(const uint32_t address) const;
+		[[nodiscard]] const char* GetStringFromMemory(const uint32_t address) const;
+		//[[nodiscard]] char* GetStringFromData(const uint32_t address);
+		[[nodiscard]] int32_t GetOpecode(const uint32_t address) const;
+
+	private:
+		/*!
+		アクターを1体実行します
+
+		内部の不変条件が壊れても呼び出し元へは伝えず、そのアクターだけを
+		停止します。1体の不具合でVM全体と組み込み先を巻き込まない為です。
+
+		@param[in]	actor	実行するアクター
+		@retval	true	実行を継続します
+		*/
+		bool RunActor(const std::shared_ptr<Actor>& actor);
+
+		[[nodiscard]] ExternalFunctionType FindFunction(const std::string& functionName) const;
+		[[nodiscard]] Buffer& GetGlobalVariables() noexcept;
+		[[nodiscard]] const Buffer& GetGlobalVariables() const noexcept;
+		[[nodiscard]] Buffer& GetStaticVariables() noexcept;
+		[[nodiscard]] const Buffer& GetStaticVariables() const noexcept;
+
+	private:
+		std::shared_ptr<Plugin> mPlugin;
+		std::shared_ptr<const void> mProgram;
+		const FileHeader* mFileHeader = nullptr;
+		const uint8_t* mInstructionPool = nullptr;
+		const char* mConstantPool = nullptr;
+		//std::vector<,*> m,Array;					//!< , オブジェクトへの配列
+		std::unordered_map<std::string, ExternalFunctionType> mFunctions;
+		std::unordered_map<std::string_view, std::shared_ptr<Actor>> mActors;		//!< オブジェクトへの連想配列
+		std::unordered_map<std::string_view, const ActorInfoHeader*> mPhantoms;		//!< phantomを表すActorオブジェクトへの連想配列
+		Buffer mGlobalVariables;
+		Buffer mStaticVariables;
+		
+		uint32_t mFrameCounter = 0;
+		enum Flag : uint8_t
+		{
+			DebugMode,					//!< デバックモードフラグ
+			FrameChanged,				//!< フレーム変更フラグ
+			InitializeActionRunning,	//!< initアクション実行中フラグ
+			InitializeActionFinished,	//!< initアクション終了フラグ
+			Initialized,				//!< 初期化済みフラグ
+			Requested,					//!< リクエスト発生済みフラグ
+			EnableSystemRequest			//!< システムリクエスト許可フラグ
+		};
+		std::bitset<8> mFlag;
+	};
+}
+
+#include "VM.inl"

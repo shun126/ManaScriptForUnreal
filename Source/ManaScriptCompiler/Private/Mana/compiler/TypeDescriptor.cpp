@@ -1,0 +1,303 @@
+/*!
+mana (compiler)
+
+@author	Shun Moriya
+@date	2003-
+*/
+
+#include "TypeDescriptor.h"
+#include "ErrorHandler.h"
+#include "Symbol.h"
+#include <iomanip>
+#include <ostream>
+
+namespace mana
+{
+	TypeDescriptor::TypeDescriptor(const Id tcons)
+		: mShare()
+		, mTypeIdentifier(tcons)
+	{
+#if defined(MANA_MEMORY_LEAK_ANALYSIS)
+		static uint32_t count = 0;
+		snprintf(mMagic, sizeof(mMagic), "T%u", count);
+		++count;
+#endif
+	}
+
+	bool TypeDescriptor::Is(const Id id) const
+	{
+		return mTypeIdentifier == id;
+	}
+
+	bool TypeDescriptor::IsNot(const Id id) const
+	{
+		return mTypeIdentifier != id;
+	}
+
+	TypeDescriptor::Id TypeDescriptor::GetId() const
+	{
+		return mTypeIdentifier;
+	}
+
+	bool TypeDescriptor::Compare(const std::shared_ptr<TypeDescriptor>& typeDescriptor) const
+	{
+		if (mTypeIdentifier != typeDescriptor->mTypeIdentifier)
+			return false;
+
+		switch (mTypeIdentifier)
+		{
+		case Id::Reference:
+			return mComponent->Compare(typeDescriptor->mComponent);
+
+		case Id::Array:
+		{
+			const address_t n1 = mArraySize;
+			const address_t n2 = typeDescriptor->mArraySize;
+			if (n1 != n2)
+				CompileError("array size unmatched");
+			return mComponent->Compare(typeDescriptor->mComponent);
+		}
+
+		case Id::Actor:
+		case Id::Struct:
+		case Id::Incomplete:
+		case Id::Void:
+		case Id::Char:
+		case Id::Short:
+		case Id::Bool:
+		case Id::Int:
+		case Id::Float:
+		case Id::Module:
+		case Id::Nil:
+		default:
+			return (this == typeDescriptor.get());
+		}
+	}
+
+	bool TypeDescriptor::Compatible(const std::shared_ptr<TypeDescriptor>& typeDescriptor) const
+	{
+		switch (mTypeIdentifier)
+		{
+		case Id::Char:
+		case Id::Short:
+		case Id::Bool:
+		case Id::Int:
+			switch (typeDescriptor->mTypeIdentifier)
+			{
+			case Id::Char:
+			case Id::Short:
+			case Id::Bool:
+			case Id::Int:
+				return true;
+			case Id::Void:
+			case Id::Float:
+			case Id::Reference:
+			case Id::Array:
+			case Id::Struct:
+			case Id::Actor:
+			case Id::Module:
+			case Id::Nil:
+			case Id::Incomplete:
+			default:
+				break;
+			}
+			break;
+
+		case Id::Float:
+			if (typeDescriptor->mTypeIdentifier == Id::Float)
+				return true;
+			break;
+
+		case Id::Struct:
+		case Id::Array:
+			if (Compare(typeDescriptor))
+				return true;
+			break;
+
+		case Id::Actor:
+			if (mTypeIdentifier == typeDescriptor->mTypeIdentifier)
+				return true;
+			break;
+
+		case Id::Reference:
+			if (this == typeDescriptor.get())
+				return true;
+			break;
+
+		case Id::Void:
+		case Id::Module:
+		case Id::Nil:
+		case Id::Incomplete:
+		default:
+			break;
+		}
+
+		CompileError("incompatible type of operand");
+
+		return false;
+	}
+
+	bool TypeDescriptor::Compare(const std::shared_ptr<TypeDescriptor>& left, const std::shared_ptr<TypeDescriptor>& right)
+	{
+		MANA_ASSERT(left);
+		MANA_ASSERT(right);
+		return left->Compare(right);
+	}
+
+	bool TypeDescriptor::Compatible(const std::shared_ptr<TypeDescriptor>& left, const std::shared_ptr<TypeDescriptor>& right)
+	{
+		MANA_ASSERT(left);
+		MANA_ASSERT(right);
+		return left->Compatible(right);
+	}
+
+	void TypeDescriptor::SetArray(const std::shared_ptr<TypeDescriptor>& arrayElementTypeDescriptor)
+	{
+		if (mComponent == nullptr)
+		{
+			if (this != arrayElementTypeDescriptor.get())
+				mComponent = arrayElementTypeDescriptor;
+
+			mAlignmentMemorySize = arrayElementTypeDescriptor->mAlignmentMemorySize;
+			mMemorySize = mArraySize * arrayElementTypeDescriptor->mMemorySize;
+		}
+		else
+		{
+			MANA_ASSERT(this != mComponent.get());
+			mComponent->SetArray(arrayElementTypeDescriptor);
+			//arrayElementTypeDescriptor = mComponent;
+			mAlignmentMemorySize = mComponent->mAlignmentMemorySize;
+			mMemorySize = mArraySize * mComponent->mMemorySize;
+		}
+	}
+
+	std::string_view TypeDescriptor::GetName() const
+	{
+		return mName;
+	}
+
+	std::shared_ptr<Symbol> TypeDescriptor::GetSymbolEntry() const
+	{
+		return mSymbolEntry;
+	}
+
+	std::shared_ptr<TypeDescriptor> TypeDescriptor::GetComponent() const
+	{
+		return mComponent;
+	}
+
+	address_t TypeDescriptor::GetArraySize() const
+	{
+		return mArraySize;
+	}
+
+	address_t TypeDescriptor::GetMemorySize() const
+	{
+		return mMemorySize;
+	}
+
+	address_t TypeDescriptor::GetAlignmentMemorySize() const
+	{
+		return mAlignmentMemorySize;
+	}
+
+	void TypeDescriptor::SetTypeDescriptor(const std::shared_ptr<TypeDescriptor>& component)
+	{
+		mComponent = component;
+	}
+
+	address_t TypeDescriptor::GetActionCount() const
+	{
+		MANA_ASSERT(mSymbolEntry);
+
+		address_t count = 0;
+		for (std::shared_ptr<Symbol> symbol = mSymbolEntry; symbol; symbol = symbol->GetNext())
+		{
+			if (symbol->GetClassTypeId() == Symbol::ClassTypeId::MemberFunction)
+				++count;
+		}
+		return count;
+	}
+
+	bool TypeDescriptor::IsPhantom() const
+	{
+		return mShare.mActor.mPhantom;
+	}
+
+	void TypeDescriptor::SetSymbolEntry(const std::shared_ptr<Symbol>& symbolEntry)
+	{
+		mSymbolEntry = symbolEntry;
+	}
+
+	void TypeDescriptor::SetName(const std::string_view name)
+	{
+		mName = name;
+	}
+
+	void TypeDescriptor::SetMemorySize(const address_t memorySize)
+	{
+		mMemorySize = memorySize;
+	}
+
+	void TypeDescriptor::SetAlignmentMemorySize(const address_t alignmentMemorySize)
+	{
+		mAlignmentMemorySize = alignmentMemorySize;
+	}
+
+	void TypeDescriptor::SetArraySize(const address_t arraySize)
+	{
+		mArraySize = arraySize;
+	}
+
+	const std::shared_ptr<Symbol>& TypeDescriptor::GetParent() const
+	{
+		return mParent;
+	}
+
+	void TypeDescriptor::SetParent(const std::shared_ptr<Symbol>& parent)
+	{
+		mParent = parent;
+	}
+
+	void TypeDescriptor::Dump(std::ostream& output) const
+	{
+		output << GetDataTypeName(mTypeIdentifier);
+		switch (mTypeIdentifier)
+		{
+		case Id::Reference:
+			output << "\\<";
+			mComponent->Dump(output);
+			output << "\\>";
+			break;
+
+		case Id::Array:
+			output << '[';
+			mComponent->Dump(output);
+			output << ", ";
+			output << mArraySize;
+			output << ']';
+			break;
+
+		case Id::Struct:
+		case Id::Actor:
+		case Id::Module:
+			output << " { ";
+			output << "0x" << std::setfill('0') << std::hex << std::setw(8) << mMemorySize;
+			output << " bytes ";
+			output << "alignment 0x" << std::setfill('0') << std::hex << std::setw(8) << mAlignmentMemorySize;
+			output << " }";
+			break;
+
+		case Id::Void:
+		case Id::Char:
+		case Id::Short:
+		case Id::Bool:
+		case Id::Int:
+		case Id::Float:
+		case Id::Nil:
+		case Id::Incomplete:
+		default:
+			break;
+		}
+	}
+}
