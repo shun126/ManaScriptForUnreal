@@ -110,9 +110,12 @@ void UManaRuntimeVM::Tick(float DeltaTime)
 		// 不変条件の破れを、そのアクターだけを止める形で内部処理します。
 		// ここへ出てくるのはそれ以外の、仮想マシンごと続行できない事態です。
 		// 毎フレーム同じ内容を吐き続けないよう、受けたら走行を止めます
+		//
+		// 時間は UE の DeltaTime で進めます。引数なしの Run() は実時間で進むため、
+		// ポーズやタイムダイレーションが wait() などに反映されません
 		try
 		{
-			mVM->Run();
+			mVM->Run(DeltaTime);
 		}
 		catch (const std::exception& Exception)
 		{

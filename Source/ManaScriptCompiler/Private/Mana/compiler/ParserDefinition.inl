@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 mana (compiler)
 
 @author	Shun Moriya

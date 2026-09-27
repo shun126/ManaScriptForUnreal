@@ -9,7 +9,7 @@
 #include "Containers/StringConv.h"
 
 #include "Mana/compiler/Compiler.h"
-#include "Mana/compiler/Version.h"
+#include "Mana/runner/common/Version.h"
 #include "Mana/runner/common/FileFormat.h"
 
 #include <string>
@@ -155,12 +155,11 @@ FManaCompileResult FManaScriptCompiler::Compile(const FManaCompileOptions& Optio
 
 FString FManaScriptCompiler::GetCompilerVersion()
 {
-	return FString::Printf(TEXT("mana %s.%s (%04d-%02d-%02d)"),
-		UTF8_TO_TCHAR(mana::build::MajorVersion),
-		UTF8_TO_TCHAR(mana::build::MinorVersion),
-		mana::build::Year,
-		mana::build::Month,
-		mana::build::Day);
+	return FString::Printf(TEXT("mana %s (%04d-%02d-%02d)"),
+		UTF8_TO_TCHAR(mana::version::Number),
+		mana::version::Year,
+		mana::version::Month,
+		mana::version::Day);
 }
 
 void FManaScriptCompiler::GetBytecodeVersion(uint8& OutMajorVersion, uint8& OutMinorVersion)

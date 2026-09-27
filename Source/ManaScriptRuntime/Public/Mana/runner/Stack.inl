@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 mana (library)
 
 \author	Shun Moriya

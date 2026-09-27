@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 mana (compiler)
 
 @author	Shun Moriya
@@ -104,6 +104,11 @@ namespace mana
 		inline std::shared_ptr<TypeDescriptor> GetReferenceTypeDescriptor()
 		{
 			return LexerInstance->mParsingDriver->GetTypeDescriptorFactory()->Get(TypeDescriptor::Id::Reference);
+		}
+
+		inline std::shared_ptr<TypeDescriptor> GetActorTypeDescriptor()
+		{
+			return LexerInstance->mParsingDriver->GetTypeDescriptorFactory()->Get(TypeDescriptor::Id::Actor);
 		}
 
 		inline int_t ToInt(const std::string_view text)

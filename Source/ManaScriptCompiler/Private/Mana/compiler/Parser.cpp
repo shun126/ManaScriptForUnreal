@@ -35,7 +35,7 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 43 "Parser.yy"
+#line 43 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 
 	#include "../runner/common/Setup.h"
 	#include "ErrorHandler.h"
@@ -56,11 +56,11 @@
 	#include <memory>
 	#include <string_view>
 
-#line 60 "Parser.cpp"
+#line 60 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
 
 
 // First part of user prologue.
-#line 1 "Parser.yy"
+#line 1 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 
 /*!
 mana (compiler)
@@ -74,7 +74,7 @@ mana (compiler)
 #endif
 
 
-#line 78 "Parser.cpp"
+#line 78 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
 
 
 #include "Parser.hpp"
@@ -151,9 +151,9 @@ mana (compiler)
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 19 "Parser.yy"
+#line 19 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 namespace mana {
-#line 157 "Parser.cpp"
+#line 157 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
 
   /// Build a parser object.
   Parser::Parser (mana::ParsingDriver* mParsingDriver_yyarg)
@@ -997,7 +997,7 @@ namespace mana {
           switch (yyn)
             {
   case 2: // program: line
-#line 121 "Parser.yy"
+#line 121 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         {
 						auto root = mParsingDriver->InjectGlobalInitializers(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ());
 						mParsingDriver->SetRootSyntaxNode(root);
@@ -1011,947 +1011,947 @@ namespace mana {
 						auto globalAddressResolver = mParsingDriver->GetCodeGenerator()->GetGlobalAddressResolver();
 						globalAddressResolver->ResolveAddress();
 					}
-#line 1015 "Parser.cpp"
+#line 1015 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 3: // line: %empty
-#line 137 "Parser.yy"
+#line 137 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1021 "Parser.cpp"
+#line 1021 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 4: // line: declarations line
-#line 139 "Parser.yy"
+#line 139 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->Bind(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1027 "Parser.cpp"
+#line 1027 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 5: // declarations: actor
-#line 142 "Parser.yy"
+#line 142 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1033 "Parser.cpp"
+#line 1033 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 6: // declarations: struct
-#line 143 "Parser.yy"
+#line 143 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1039 "Parser.cpp"
+#line 1039 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 7: // declarations: function
-#line 144 "Parser.yy"
+#line 144 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1045 "Parser.cpp"
+#line 1045 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 8: // declarations: declaration ';'
-#line 145 "Parser.yy"
+#line 145 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1051 "Parser.cpp"
+#line 1051 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 9: // declarations: tNAMESPACE qualified_name '{' line '}'
-#line 147 "Parser.yy"
+#line 147 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNamespace(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1057 "Parser.cpp"
+#line 1057 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 10: // declarations: tUSING qualified_name ';'
-#line 149 "Parser.yy"
+#line 149 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateUsing(yystack_[1].value.as < std::string_view > ()); }
-#line 1063 "Parser.cpp"
+#line 1063 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 11: // declarations: tNATIVE variable_type tIDENTIFIER '(' arg_decls ')' ';'
-#line 152 "Parser.yy"
+#line 152 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNativeFunction(yystack_[5].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[4].value.as < std::string_view > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1069 "Parser.cpp"
+#line 1069 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 12: // declarations: tALLOCATE tDIGIT '{' allocate_declarations '}'
-#line 155 "Parser.yy"
+#line 155 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareMemory(yystack_[3].value.as < mana::int_t > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1075 "Parser.cpp"
+#line 1075 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 13: // declarations: tSTATIC '{' allocate_declarations '}'
-#line 157 "Parser.yy"
+#line 157 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareStaticMemory(0, yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1081 "Parser.cpp"
+#line 1081 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 14: // declarations: tSTATIC tALLOCATE tDIGIT '{' allocate_declarations '}'
-#line 159 "Parser.yy"
+#line 159 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareStaticMemory(yystack_[3].value.as < mana::int_t > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1087 "Parser.cpp"
+#line 1087 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 15: // declarations: tINCLUDE tSTRING ';'
-#line 162 "Parser.yy"
+#line 162 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; if(! lexer::Open(yystack_[1].value.as < std::string_view > (), false)){ YYABORT; } }
-#line 1093 "Parser.cpp"
+#line 1093 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 16: // declarations: tIMPORT tSTRING ';'
-#line 164 "Parser.yy"
+#line 164 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; if(! lexer::Open(yystack_[1].value.as < std::string_view > (), true)){ YYABORT; } }
-#line 1099 "Parser.cpp"
+#line 1099 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 17: // allocate_declarations: %empty
-#line 169 "Parser.yy"
+#line 169 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1105 "Parser.cpp"
+#line 1105 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 18: // allocate_declarations: variable_decl ';' allocate_declarations
-#line 171 "Parser.yy"
+#line 171 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->Bind(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1111 "Parser.cpp"
+#line 1111 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 19: // declaration: variable_decl
-#line 174 "Parser.yy"
+#line 174 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                           { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1117 "Parser.cpp"
+#line 1117 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 20: // declaration: const_decl
-#line 175 "Parser.yy"
+#line 175 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1123 "Parser.cpp"
+#line 1123 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 21: // actor: tACTOR tIDENTIFIER '{' actions '}'
-#line 179 "Parser.yy"
+#line 179 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateActor(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1129 "Parser.cpp"
+#line 1129 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 22: // actor: tPHANTOM tIDENTIFIER '{' actions '}'
-#line 181 "Parser.yy"
+#line 181 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreatePhantom(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1135 "Parser.cpp"
+#line 1135 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 23: // actor: tMODULE tIDENTIFIER '{' actions '}'
-#line 183 "Parser.yy"
+#line 183 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateModule(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1141 "Parser.cpp"
+#line 1141 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 24: // actions: %empty
-#line 187 "Parser.yy"
+#line 187 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1147 "Parser.cpp"
+#line 1147 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 25: // actions: action actions
-#line 189 "Parser.yy"
+#line 189 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->Bind(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1153 "Parser.cpp"
+#line 1153 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 26: // action: tACTION tIDENTIFIER block
-#line 193 "Parser.yy"
-                                        { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAction(yystack_[1].value.as < std::string_view > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1159 "Parser.cpp"
+  case 26: // action: tACTION tIDENTIFIER optional_empty_parens block
+#line 193 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
+                                        { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAction(yystack_[2].value.as < std::string_view > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
+#line 1159 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 27: // action: tEXTEND qualified_name ';'
-#line 195 "Parser.yy"
+#line 195 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateExtend(yystack_[1].value.as < std::string_view > ()); }
-#line 1165 "Parser.cpp"
+#line 1165 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 28: // action: declaration ';'
-#line 196 "Parser.yy"
+#line 196 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1171 "Parser.cpp"
+#line 1171 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 29: // struct: tSTRUCT tIDENTIFIER '{' struct_members '}'
-#line 200 "Parser.yy"
+#line 200 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateStruct(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1177 "Parser.cpp"
+#line 1177 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 30: // struct_members: %empty
-#line 204 "Parser.yy"
+#line 204 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1183 "Parser.cpp"
+#line 1183 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 31: // struct_members: struct_member struct_members
-#line 206 "Parser.yy"
+#line 206 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->Bind(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1189 "Parser.cpp"
+#line 1189 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 32: // struct_member: variable_decl ';'
-#line 209 "Parser.yy"
+#line 209 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1195 "Parser.cpp"
+#line 1195 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 33: // struct_member: function
-#line 210 "Parser.yy"
+#line 210 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1201 "Parser.cpp"
+#line 1201 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 34: // struct_member: tNATIVE variable_type tIDENTIFIER '(' arg_decls ')' ';'
-#line 212 "Parser.yy"
+#line 212 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNativeFunction(yystack_[5].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[4].value.as < std::string_view > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1207 "Parser.cpp"
+#line 1207 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 35: // function: variable_type tIDENTIFIER '(' arg_decls ')' block
-#line 216 "Parser.yy"
+#line 216 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateInternalFunction(yystack_[5].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[4].value.as < std::string_view > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1213 "Parser.cpp"
+#line 1213 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 36: // variable_type: tACTOR
-#line 220 "Parser.yy"
-                                        { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateActorTypeDescription(); }
-#line 1219 "Parser.cpp"
+  case 36: // function: variable_type tIDENTIFIER block
+#line 218 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
+                                        { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateInternalFunction(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[1].value.as < std::string_view > (), nullptr, yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
+#line 1219 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 37: // variable_type: qualified_name
-#line 222 "Parser.yy"
+#line 222 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateTypeDescription(yystack_[0].value.as < std::string_view > ()); }
-#line 1225 "Parser.cpp"
+#line 1225 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 38: // variable_type: tTYPE
-#line 224 "Parser.yy"
+#line 224 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateTypeDescription(yystack_[0].value.as < std::shared_ptr<mana::TypeDescriptor> > ()); }
-#line 1231 "Parser.cpp"
+#line 1231 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 39: // block: '{' statements '}'
-#line 228 "Parser.yy"
+#line 228 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateBlock(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1237 "Parser.cpp"
+#line 1237 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 40: // statements: %empty
-#line 232 "Parser.yy"
+#line 232 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1243 "Parser.cpp"
+#line 1243 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 41: // statements: statement statements
-#line 234 "Parser.yy"
+#line 234 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->Bind(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1249 "Parser.cpp"
+#line 1249 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 42: // statement: tIF '(' expression ')' statement
-#line 237 "Parser.yy"
+#line 237 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateIf(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (), nullptr); }
-#line 1255 "Parser.cpp"
+#line 1255 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 43: // statement: tIF '(' expression ')' statement tELSE statement
-#line 239 "Parser.yy"
+#line 239 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateIf(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1261 "Parser.cpp"
+#line 1261 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 44: // statement: tSWITCH '(' expression ')' '{' cases '}'
-#line 241 "Parser.yy"
+#line 241 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSwitch(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1267 "Parser.cpp"
+#line 1267 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 45: // statement: tWHILE '(' expression ')' statement
-#line 243 "Parser.yy"
+#line 243 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateWhile(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1273 "Parser.cpp"
+#line 1273 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 46: // statement: tDO statement tWHILE '(' expression ')' ';'
-#line 245 "Parser.yy"
+#line 245 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDoWhile(yystack_[5].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1279 "Parser.cpp"
+#line 1279 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 47: // statement: tFOR '(' expression ';' expression ';' expression ')' statement
-#line 247 "Parser.yy"
+#line 247 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateFor(yystack_[6].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1285 "Parser.cpp"
+#line 1285 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 48: // statement: tFOR '(' variable_decl ';' expression ';' expression ')' statement
-#line 249 "Parser.yy"
+#line 249 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateFor(yystack_[6].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1291 "Parser.cpp"
+#line 1291 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 49: // statement: tLOOP statement
-#line 251 "Parser.yy"
+#line 251 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLoop(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1297 "Parser.cpp"
+#line 1297 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 50: // statement: tLOCK statement
-#line 253 "Parser.yy"
+#line 253 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLock(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1303 "Parser.cpp"
+#line 1303 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 51: // statement: GOTO tIDENTIFIER ';'
-#line 255 "Parser.yy"
+#line 255 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateGoto(yystack_[1].value.as < std::string_view > ()); }
-#line 1309 "Parser.cpp"
+#line 1309 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 52: // statement: tIDENTIFIER ':'
-#line 257 "Parser.yy"
+#line 257 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLabel(yystack_[1].value.as < std::string_view > ()); }
-#line 1315 "Parser.cpp"
+#line 1315 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 53: // statement: tRETURN ';'
-#line 259 "Parser.yy"
+#line 259 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateReturn(nullptr); }
-#line 1321 "Parser.cpp"
+#line 1321 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 54: // statement: tRETURN expression ';'
-#line 261 "Parser.yy"
+#line 261 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateReturn(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1327 "Parser.cpp"
+#line 1327 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 55: // statement: tROLLBACK expression ';'
-#line 263 "Parser.yy"
+#line 263 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateRollback(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1333 "Parser.cpp"
+#line 1333 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 56: // statement: tBREAK ';'
-#line 265 "Parser.yy"
+#line 265 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateBreak(); }
-#line 1339 "Parser.cpp"
+#line 1339 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 57: // statement: tCONTINUE ';'
-#line 267 "Parser.yy"
+#line 267 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateContinue(); }
-#line 1345 "Parser.cpp"
+#line 1345 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 58: // statement: tHALT '(' ')' ';'
-#line 269 "Parser.yy"
+#line 269 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateHalt(); }
-#line 1351 "Parser.cpp"
+#line 1351 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 59: // statement: tYIELD '(' ')' ';'
-#line 271 "Parser.yy"
+#line 271 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateYield(); }
-#line 1357 "Parser.cpp"
+#line 1357 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 60: // statement: tCOMPLY '(' ')' ';'
-#line 273 "Parser.yy"
+#line 273 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateComply(); }
-#line 1363 "Parser.cpp"
+#line 1363 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 61: // statement: tREFUSE '(' ')' ';'
-#line 275 "Parser.yy"
+#line 275 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateRefuse(); }
-#line 1369 "Parser.cpp"
+#line 1369 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 62: // statement: tPRINT '(' arg_calls ')' ';'
-#line 277 "Parser.yy"
+#line 277 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreatePrint(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1375 "Parser.cpp"
+#line 1375 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 63: // statement: tREQUEST '(' expression ',' action_ref ')' ';'
-#line 279 "Parser.yy"
+#line 279 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateRequest(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < mana::ActionReference > ().actor, yystack_[2].value.as < mana::ActionReference > ().action); }
-#line 1381 "Parser.cpp"
+#line 1381 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 64: // statement: tAwaitStart '(' expression ',' action_ref ')' ';'
-#line 281 "Parser.yy"
+#line 281 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAwaitStart(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < mana::ActionReference > ().actor, yystack_[2].value.as < mana::ActionReference > ().action); }
-#line 1387 "Parser.cpp"
+#line 1387 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 65: // statement: tAwaitCompletion '(' expression ',' action_ref ')' ';'
-#line 283 "Parser.yy"
+#line 283 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAwaitCompletion(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < mana::ActionReference > ().actor, yystack_[2].value.as < mana::ActionReference > ().action); }
-#line 1393 "Parser.cpp"
+#line 1393 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 66: // statement: tJOIN '(' expression ',' expression ')' ';'
-#line 285 "Parser.yy"
+#line 285 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateJoin(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1399 "Parser.cpp"
+#line 1399 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 67: // statement: block
-#line 286 "Parser.yy"
+#line 286 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1405 "Parser.cpp"
+#line 1405 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 68: // statement: declaration ';'
-#line 287 "Parser.yy"
+#line 287 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1411 "Parser.cpp"
+#line 1411 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 69: // statement: expression ';'
-#line 288 "Parser.yy"
+#line 288 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1417 "Parser.cpp"
+#line 1417 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 70: // statement: ';'
-#line 290 "Parser.yy"
+#line 290 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1423 "Parser.cpp"
+#line 1423 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 71: // statement: error ';'
-#line 292 "Parser.yy"
+#line 292 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; yyerrok; yyclearin; }
-#line 1429 "Parser.cpp"
+#line 1429 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 72: // statement: error '}'
-#line 294 "Parser.yy"
+#line 294 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; yyerrok; yyclearin; }
-#line 1435 "Parser.cpp"
+#line 1435 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 73: // expression: left_hand '=' expression
-#line 298 "Parser.yy"
+#line 298 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1441 "Parser.cpp"
+#line 1441 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 74: // expression: expression tAND expression
-#line 300 "Parser.yy"
+#line 300 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLogicalAnd(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1447 "Parser.cpp"
+#line 1447 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 75: // expression: expression tOR expression
-#line 302 "Parser.yy"
+#line 302 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLogicalOr(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1453 "Parser.cpp"
+#line 1453 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 76: // expression: expression tAADD expression
-#line 304 "Parser.yy"
+#line 304 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAddAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1459 "Parser.cpp"
+#line 1459 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 77: // expression: expression tASUB expression
-#line 306 "Parser.yy"
+#line 306 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSubAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1465 "Parser.cpp"
+#line 1465 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 78: // expression: expression tAMUL expression
-#line 308 "Parser.yy"
+#line 308 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateMulAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1471 "Parser.cpp"
+#line 1471 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 79: // expression: expression tADIV expression
-#line 310 "Parser.yy"
+#line 310 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDivAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1477 "Parser.cpp"
+#line 1477 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 80: // expression: expression tAMOD expression
-#line 312 "Parser.yy"
+#line 312 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateModAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1483 "Parser.cpp"
+#line 1483 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 81: // expression: expression tAAND expression
-#line 314 "Parser.yy"
+#line 314 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAndAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1489 "Parser.cpp"
+#line 1489 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 82: // expression: expression tAOR expression
-#line 316 "Parser.yy"
+#line 316 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateOrAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1495 "Parser.cpp"
+#line 1495 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 83: // expression: expression tAXOR expression
-#line 318 "Parser.yy"
+#line 318 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateXorAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1501 "Parser.cpp"
+#line 1501 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 84: // expression: expression tALSHFT expression
-#line 320 "Parser.yy"
+#line 320 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLeftShiftAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1507 "Parser.cpp"
+#line 1507 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 85: // expression: expression tARSHFT expression
-#line 322 "Parser.yy"
+#line 322 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateRightShiftAndAssign(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1513 "Parser.cpp"
+#line 1513 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 86: // expression: expression '+' expression
-#line 324 "Parser.yy"
+#line 324 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAdd(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1519 "Parser.cpp"
+#line 1519 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 87: // expression: expression '-' expression
-#line 326 "Parser.yy"
+#line 326 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSub(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1525 "Parser.cpp"
+#line 1525 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 88: // expression: expression '*' expression
-#line 328 "Parser.yy"
+#line 328 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateMul(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1531 "Parser.cpp"
+#line 1531 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 89: // expression: expression '/' expression
-#line 330 "Parser.yy"
+#line 330 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDiv(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1537 "Parser.cpp"
+#line 1537 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 90: // expression: expression '%' expression
-#line 332 "Parser.yy"
+#line 332 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateMod(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1543 "Parser.cpp"
+#line 1543 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 91: // expression: expression tPOW expression
-#line 334 "Parser.yy"
+#line 334 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreatePow(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1549 "Parser.cpp"
+#line 1549 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 92: // expression: expression '&' expression
-#line 336 "Parser.yy"
+#line 336 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateAnd(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1555 "Parser.cpp"
+#line 1555 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 93: // expression: expression '|' expression
-#line 338 "Parser.yy"
+#line 338 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateOr(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1561 "Parser.cpp"
+#line 1561 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 94: // expression: expression '^' expression
-#line 340 "Parser.yy"
+#line 340 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateXor(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1567 "Parser.cpp"
+#line 1567 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 95: // expression: expression tLSHFT expression
-#line 342 "Parser.yy"
+#line 342 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLeftShift(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1573 "Parser.cpp"
+#line 1573 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 96: // expression: expression tRSHFT expression
-#line 344 "Parser.yy"
+#line 344 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateRightShift(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1579 "Parser.cpp"
+#line 1579 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 97: // expression: expression '>' expression
-#line 346 "Parser.yy"
+#line 346 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateGreater(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1585 "Parser.cpp"
+#line 1585 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 98: // expression: expression tGE expression
-#line 348 "Parser.yy"
+#line 348 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateGreaterEqual(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1591 "Parser.cpp"
+#line 1591 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 99: // expression: expression '<' expression
-#line 350 "Parser.yy"
+#line 350 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLess(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1597 "Parser.cpp"
+#line 1597 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 100: // expression: expression tLE expression
-#line 352 "Parser.yy"
+#line 352 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateLessEqual(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1603 "Parser.cpp"
+#line 1603 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 101: // expression: expression tEQ expression
-#line 354 "Parser.yy"
+#line 354 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateEqual(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1609 "Parser.cpp"
+#line 1609 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 102: // expression: expression tNE expression
-#line 356 "Parser.yy"
+#line 356 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNotEqual(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1615 "Parser.cpp"
+#line 1615 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 103: // expression: tINC expression
-#line 358 "Parser.yy"
+#line 358 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateIncrement(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1621 "Parser.cpp"
+#line 1621 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 104: // expression: tDEC expression
-#line 360 "Parser.yy"
+#line 360 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDecrement(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1627 "Parser.cpp"
+#line 1627 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 105: // expression: expression tINC
-#line 362 "Parser.yy"
+#line 362 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateIncrement(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1633 "Parser.cpp"
+#line 1633 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 106: // expression: expression tDEC
-#line 364 "Parser.yy"
+#line 364 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDecrement(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1639 "Parser.cpp"
+#line 1639 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 107: // expression: expression '?' expression ':' expression
-#line 366 "Parser.yy"
+#line 366 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateExpressionIf(yystack_[4].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1645 "Parser.cpp"
+#line 1645 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 108: // expression: primary
-#line 367 "Parser.yy"
+#line 367 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1651 "Parser.cpp"
+#line 1651 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 109: // primary: '-' expression
-#line 371 "Parser.yy"
+#line 371 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNegative(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1657 "Parser.cpp"
+#line 1657 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 110: // primary: '+' expression
-#line 373 "Parser.yy"
+#line 373 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1663 "Parser.cpp"
+#line 1663 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 111: // primary: '!' expression
-#line 375 "Parser.yy"
+#line 375 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNot(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1669 "Parser.cpp"
+#line 1669 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 112: // primary: '~' expression
-#line 377 "Parser.yy"
+#line 377 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateComplement1(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1675 "Parser.cpp"
+#line 1675 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 113: // primary: tSIZEOF '(' variable_type ')'
-#line 379 "Parser.yy"
+#line 379 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSizeOf(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1681 "Parser.cpp"
+#line 1681 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 114: // primary: tIDENTIFIER '(' arg_calls ')'
-#line 381 "Parser.yy"
+#line 381 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateCall(yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1687 "Parser.cpp"
+#line 1687 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 115: // primary: constant
-#line 382 "Parser.yy"
+#line 382 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1693 "Parser.cpp"
+#line 1693 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 116: // primary: left_hand
-#line 383 "Parser.yy"
+#line 383 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1699 "Parser.cpp"
+#line 1699 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 117: // constant: tFALSE
-#line 387 "Parser.yy"
+#line 387 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateBool(false); }
-#line 1705 "Parser.cpp"
+#line 1705 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 118: // constant: tTRUE
-#line 389 "Parser.yy"
+#line 389 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateBool(true); }
-#line 1711 "Parser.cpp"
+#line 1711 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 119: // constant: tPRIORITY
-#line 391 "Parser.yy"
+#line 391 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreatePriority(); }
-#line 1717 "Parser.cpp"
+#line 1717 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 120: // constant: tSELF
-#line 393 "Parser.yy"
+#line 393 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSelf(); }
-#line 1723 "Parser.cpp"
+#line 1723 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 121: // constant: tSENDER
-#line 395 "Parser.yy"
+#line 395 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSender(); }
-#line 1729 "Parser.cpp"
+#line 1729 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 122: // constant: tNIL
-#line 397 "Parser.yy"
+#line 397 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateNil(); }
-#line 1735 "Parser.cpp"
+#line 1735 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 123: // constant: tDIGIT
-#line 399 "Parser.yy"
+#line 399 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateInteger(yystack_[0].value.as < mana::int_t > ()); }
-#line 1741 "Parser.cpp"
+#line 1741 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 124: // constant: tREAL
-#line 401 "Parser.yy"
+#line 401 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateFloat(yystack_[0].value.as < mana::float_t > ()); }
-#line 1747 "Parser.cpp"
+#line 1747 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 125: // constant: tSTRING
-#line 403 "Parser.yy"
+#line 403 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateString(yystack_[0].value.as < std::string_view > ()); }
-#line 1753 "Parser.cpp"
+#line 1753 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 126: // left_hand: left_hand '.' tIDENTIFIER
-#line 407 "Parser.yy"
+#line 407 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateMemberVariable(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::string_view > ()); }
-#line 1759 "Parser.cpp"
+#line 1759 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 127: // left_hand: left_hand '.' tIDENTIFIER '(' arg_calls ')'
-#line 409 "Parser.yy"
+#line 409 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateMemberFunction(yystack_[5].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[3].value.as < std::string_view > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1765 "Parser.cpp"
+#line 1765 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 128: // left_hand: left_hand '[' expression ']'
-#line 411 "Parser.yy"
+#line 411 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateArray(yystack_[3].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1771 "Parser.cpp"
+#line 1771 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 129: // left_hand: tIDENTIFIER
-#line 413 "Parser.yy"
+#line 413 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateIdentifier(yystack_[0].value.as < std::string_view > ()); }
-#line 1777 "Parser.cpp"
+#line 1777 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 130: // left_hand: tTHIS
-#line 415 "Parser.yy"
+#line 415 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateThis(); }
-#line 1783 "Parser.cpp"
+#line 1783 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 131: // left_hand: '(' expression ')'
-#line 417 "Parser.yy"
+#line 417 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1789 "Parser.cpp"
+#line 1789 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 132: // qualified_name: tIDENTIFIER
-#line 421 "Parser.yy"
+#line 421 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::string_view > () = yystack_[0].value.as < std::string_view > (); }
-#line 1795 "Parser.cpp"
+#line 1795 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
   case 133: // qualified_name: qualified_name tDC tIDENTIFIER
-#line 423 "Parser.yy"
+#line 423 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::string_view > () = mParsingDriver->CreateQualifiedName(yystack_[2].value.as < std::string_view > (), yystack_[0].value.as < std::string_view > ()); }
-#line 1801 "Parser.cpp"
+#line 1801 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 134: // action_ref: expression tARROW tIDENTIFIER
-#line 427 "Parser.yy"
+  case 134: // action_ref: expression tARROW tIDENTIFIER optional_empty_parens
+#line 427 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         {
-						yylhs.value.as < mana::ActionReference > ().actor = yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > ();
-						yylhs.value.as < mana::ActionReference > ().action = yystack_[0].value.as < std::string_view > ();
+						yylhs.value.as < mana::ActionReference > ().actor = yystack_[3].value.as < std::shared_ptr<mana::SyntaxNode> > ();
+						yylhs.value.as < mana::ActionReference > ().action = yystack_[1].value.as < std::string_view > ();
 					}
-#line 1810 "Parser.cpp"
+#line 1810 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 135: // action_ref: qualified_name tARROW tIDENTIFIER
-#line 432 "Parser.yy"
+  case 135: // action_ref: qualified_name tARROW tIDENTIFIER optional_empty_parens
+#line 432 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         {
-						yylhs.value.as < mana::ActionReference > ().actor = mParsingDriver->CreateIdentifier(yystack_[2].value.as < std::string_view > ());
-						yylhs.value.as < mana::ActionReference > ().action = yystack_[0].value.as < std::string_view > ();
+						yylhs.value.as < mana::ActionReference > ().actor = mParsingDriver->CreateIdentifier(yystack_[3].value.as < std::string_view > ());
+						yylhs.value.as < mana::ActionReference > ().action = yystack_[1].value.as < std::string_view > ();
 					}
-#line 1819 "Parser.cpp"
+#line 1819 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 136: // action_ref: qualified_name tDC tIDENTIFIER
-#line 437 "Parser.yy"
+  case 136: // action_ref: qualified_name tDC tIDENTIFIER optional_empty_parens
+#line 437 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         {
-						if (yystack_[2].value.as < std::string_view > ().find("::") != std::string_view::npos)
+						if (yystack_[3].value.as < std::string_view > ().find("::") != std::string_view::npos)
 						{
-							mana::CompileError({ "legacy action reference cannot use namespace '", yystack_[2].value.as < std::string_view > (), "'" });
+							mana::CompileError({ "legacy action reference cannot use namespace '", yystack_[3].value.as < std::string_view > (), "'" });
 						}
 						else
 						{
-							mana::CompileWarning({ "legacy action reference '", yystack_[2].value.as < std::string_view > (), "::", yystack_[0].value.as < std::string_view > (), "' is deprecated. Use '->' instead." });
+							mana::CompileWarning({ "legacy action reference '", yystack_[3].value.as < std::string_view > (), "::", yystack_[1].value.as < std::string_view > (), "' is deprecated. Use '->' instead." });
 						}
-						yylhs.value.as < mana::ActionReference > ().actor = mParsingDriver->CreateIdentifier(yystack_[2].value.as < std::string_view > ());
-						yylhs.value.as < mana::ActionReference > ().action = yystack_[0].value.as < std::string_view > ();
+						yylhs.value.as < mana::ActionReference > ().actor = mParsingDriver->CreateIdentifier(yystack_[3].value.as < std::string_view > ());
+						yylhs.value.as < mana::ActionReference > ().action = yystack_[1].value.as < std::string_view > ();
 						yylhs.value.as < mana::ActionReference > ().legacy = true;
 					}
-#line 1837 "Parser.cpp"
+#line 1837 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 137: // cases: case
-#line 452 "Parser.yy"
+  case 139: // cases: case
+#line 457 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                           { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1843 "Parser.cpp"
+#line 1843 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 138: // cases: cases case
-#line 454 "Parser.yy"
+  case 140: // cases: cases case
+#line 459 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->BindCaseNode(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1849 "Parser.cpp"
+#line 1849 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 139: // case: tCASE expression ':' statements
-#line 457 "Parser.yy"
+  case 141: // case: tCASE expression ':' statements
+#line 462 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSwitchCaseNode(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1855 "Parser.cpp"
+#line 1855 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 140: // case: tDEFAULT ':' statements
-#line 459 "Parser.yy"
+  case 142: // case: tDEFAULT ':' statements
+#line 464 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateSwitchDefaultNode(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1861 "Parser.cpp"
+#line 1861 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 141: // arg_calls: %empty
-#line 463 "Parser.yy"
+  case 143: // arg_calls: %empty
+#line 468 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1867 "Parser.cpp"
+#line 1867 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 142: // arg_calls: expression
-#line 465 "Parser.yy"
+  case 144: // arg_calls: expression
+#line 470 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateArgumentNode(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1873 "Parser.cpp"
+#line 1873 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 143: // arg_calls: expression ',' arg_calls
-#line 467 "Parser.yy"
+  case 145: // arg_calls: expression ',' arg_calls
+#line 472 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateArgumentNode(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1879 "Parser.cpp"
+#line 1879 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 144: // arg_decls: %empty
-#line 471 "Parser.yy"
+  case 146: // arg_decls: %empty
+#line 476 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = nullptr; }
-#line 1885 "Parser.cpp"
+#line 1885 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 145: // arg_decls: variable_decl
-#line 473 "Parser.yy"
+  case 147: // arg_decls: variable_decl
+#line 478 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareArgumentNode(yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1891 "Parser.cpp"
+#line 1891 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 146: // arg_decls: arg_decls ',' variable_decl
-#line 475 "Parser.yy"
+  case 148: // arg_decls: arg_decls ',' variable_decl
+#line 480 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareArgumentNode(yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1897 "Parser.cpp"
+#line 1897 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 147: // variable_decl: variable_type declarator
-#line 480 "Parser.yy"
+  case 149: // variable_decl: variable_type declarator
+#line 485 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareVariableNode(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (), nullptr); }
-#line 1903 "Parser.cpp"
+#line 1903 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 148: // variable_decl: variable_type declarator '=' expression
-#line 482 "Parser.yy"
+  case 150: // variable_decl: variable_type declarator '=' expression
+#line 487 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclareVariableNode(yystack_[3].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1909 "Parser.cpp"
+#line 1909 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 149: // const_decl: tCONST variable_type tIDENTIFIER '=' expression
-#line 487 "Parser.yy"
+  case 151: // const_decl: tCONST variable_type tIDENTIFIER '=' expression
+#line 492 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateConstDeclarationNode(yystack_[3].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[2].value.as < std::string_view > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1915 "Parser.cpp"
+#line 1915 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 150: // declarator: tIDENTIFIER
-#line 491 "Parser.yy"
+  case 152: // declarator: tIDENTIFIER
+#line 496 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclaratorNode(yystack_[0].value.as < std::string_view > ()); }
-#line 1921 "Parser.cpp"
+#line 1921 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 151: // declarator: tIDENTIFIER variable_sizes
-#line 493 "Parser.yy"
+  case 153: // declarator: tIDENTIFIER variable_sizes
+#line 498 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = mParsingDriver->CreateDeclaratorNode(yystack_[1].value.as < std::string_view > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1927 "Parser.cpp"
+#line 1927 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 152: // variable_sizes: variable_size
-#line 496 "Parser.yy"
+  case 154: // variable_sizes: variable_size
+#line 501 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                   { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > (); }
-#line 1933 "Parser.cpp"
+#line 1933 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 153: // variable_sizes: variable_size variable_sizes
-#line 498 "Parser.yy"
+  case 155: // variable_sizes: variable_size variable_sizes
+#line 503 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = 	mParsingDriver->Bind(yystack_[1].value.as < std::shared_ptr<mana::SyntaxNode> > (), yystack_[0].value.as < std::shared_ptr<mana::SyntaxNode> > ()); }
-#line 1939 "Parser.cpp"
+#line 1939 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 154: // variable_size: '[' tDIGIT ']'
-#line 501 "Parser.yy"
+  case 156: // variable_size: '[' tDIGIT ']'
+#line 506 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = 	mParsingDriver->CreateVariableSizeNode(yystack_[1].value.as < mana::int_t > ()); }
-#line 1945 "Parser.cpp"
+#line 1945 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
-  case 155: // variable_size: '[' tIDENTIFIER ']'
-#line 503 "Parser.yy"
+  case 157: // variable_size: '[' tIDENTIFIER ']'
+#line 508 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
                                         { yylhs.value.as < std::shared_ptr<mana::SyntaxNode> > () = 	mParsingDriver->CreateVariableSizeNode(yystack_[1].value.as < std::string_view > ()); }
-#line 1951 "Parser.cpp"
+#line 1951 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
     break;
 
 
-#line 1955 "Parser.cpp"
+#line 1955 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
 
             default:
               break;
@@ -2140,52 +2140,52 @@ namespace mana {
 
 
 
-  const short Parser::yypact_ninf_ = -250;
+  const short Parser::yypact_ninf_ = -325;
 
-  const short Parser::yytable_ninf_ = -137;
+  const short Parser::yytable_ninf_ = -138;
 
   const short
   Parser::yypact_[] =
   {
-     260,  -250,  -250,    20,    34,   204,   204,    15,    43,    48,
-      52,    62,    62,   -40,   116,   122,  -250,   260,    29,  -250,
-    -250,  -250,   126,    94,  -250,  -250,    46,    49,  -250,   153,
-     158,    75,    80,   109,   113,   -34,   -32,   212,   204,   118,
-    -250,  -250,  -250,   -85,   149,   217,  -250,  -250,   157,   125,
-     194,   114,   114,   114,   260,  -250,   128,   130,   219,   133,
-     204,   204,    32,  -250,   127,   581,  -250,   581,   204,   204,
-     137,   194,  -250,   135,   232,    62,   143,   142,   114,   144,
-     148,   150,   204,  -250,   127,   204,   151,   -69,  -250,   139,
-     141,  -250,  -250,  -250,  -250,   152,  -250,  -250,  -250,  -250,
-    -250,  -250,  -250,   581,   581,   161,   581,   581,   581,   581,
-     581,  1663,  -250,  -250,   -35,  1663,    37,   237,  -250,  -250,
-    -250,   159,   -31,  -250,  -250,  -250,  -250,  -250,  -250,   163,
-    -250,  -250,   159,   204,  -250,  -250,   581,   -23,   -23,   204,
-     -23,   -23,  -250,  -250,   965,   581,   581,   581,   581,   581,
-     581,   581,   581,   581,   581,   581,   581,   581,   581,   581,
-     581,   581,   581,   581,   581,   581,   581,   581,   581,   581,
-     581,   581,   581,   581,   581,  -250,  -250,   581,   243,   581,
-     154,   164,   398,  -250,  -250,  -250,  -250,  -250,   730,   162,
-     167,  -250,  1702,  1702,  1702,  1738,  1738,  1772,  1772,   290,
-     290,   290,  1585,  1796,  1796,  1820,  1820,  1842,  1842,  1842,
-    1842,   104,   104,   201,   477,   477,    68,    68,    42,    42,
-      42,    42,   389,   176,   691,  -250,   204,   -19,    11,   178,
-     191,   193,   196,   207,   213,   293,   209,   499,   499,   214,
-     215,   499,   216,   553,   581,   236,   239,   249,   250,   256,
-    -250,   220,  -250,   238,   297,  1333,   581,  -250,  -250,   581,
-     581,  -250,    40,  -250,  -250,  -250,   581,   581,   581,   581,
-    -250,  -250,   261,   277,  -250,   331,   145,   581,  -250,   281,
-    -250,  1375,  1417,   581,   581,   581,   287,   288,  -250,  -250,
-    -250,  -250,  -250,   389,   291,   296,   777,   824,   871,   918,
-    -250,   302,   305,    16,  1459,   309,  1011,   310,  -250,  -250,
-    1057,  1103,   307,   313,   314,  -250,  -250,   607,   607,   607,
-     581,  -250,   581,   581,   581,   499,  -250,   315,   499,   317,
-    -250,  -250,   652,   117,   316,   332,   336,  1149,  1195,  1501,
-    1543,   373,   147,  -250,  -250,   411,   413,   427,   341,   343,
-     353,   354,   357,   581,   581,   499,   581,   387,   -25,  -250,
-    -250,   356,  -250,  -250,  -250,  -250,  -250,  -250,  1241,  1287,
-    -250,  1624,   297,  -250,  -250,   499,   499,   297,  -250,  -250,
-    -250,  -250
+     166,  -325,  -325,    14,    55,    89,    89,    36,    64,    67,
+      79,    85,    85,   -27,    34,    93,  -325,   166,    -1,  -325,
+    -325,  -325,    94,    71,  -325,  -325,    21,    35,   164,   177,
+     106,   107,   110,   111,   -31,   -29,   204,    89,   112,  -325,
+    -325,  -325,    -7,   145,   207,  -325,  -325,   150,   113,    23,
+      26,    26,    26,   166,  -325,   137,   138,   233,   142,    89,
+     382,    89,    22,  -325,  -325,   140,   591,  -325,   591,    89,
+      89,   143,    23,  -325,   157,   250,    85,   159,   160,    26,
+     161,   172,   173,    89,  -325,   140,    89,   174,   -22,  -325,
+    -325,  -325,     6,  -325,  -325,  -325,  -325,  -325,  -325,  -325,
+     158,   180,   182,   188,   192,   197,   269,   195,   483,   483,
+     196,   200,   483,   201,   537,   591,   220,   221,   223,   234,
+     237,   591,   591,   238,   591,   591,   591,   591,  -325,   591,
+     236,  -325,   240,   281,  1345,  -325,  -325,   -50,    25,  -325,
+     235,   256,  -325,   241,  1675,  1675,    27,   337,  -325,  -325,
+    -325,   262,   -24,  -325,  -325,  -325,  -325,  -325,  -325,   266,
+    -325,  -325,  -325,  -325,  -325,   591,   591,   591,   591,   591,
+    -325,  -325,   271,   272,  -325,   322,   582,   591,  -325,   275,
+    -325,  1387,  1429,   591,   591,   591,   276,   282,    37,    37,
+      89,    37,    37,  -325,  -325,   977,  -325,  -325,  -325,   591,
+     591,   591,   591,   591,   591,   591,   591,   591,   591,   591,
+     591,   591,   591,   591,   591,   591,   591,   591,   591,   591,
+     591,   591,   591,   591,   591,   591,   591,   591,   591,  -325,
+    -325,  -325,   591,   384,   591,   292,    89,  -325,  -325,   294,
+     295,   291,   292,  -325,  -325,   742,   293,   789,   836,   883,
+     930,  -325,   299,   297,     7,  1471,   301,  1023,   302,  -325,
+    -325,  1069,  1115,   300,   303,   305,   315,  -325,  1714,  1714,
+    1714,  1750,  1750,  1784,  1784,   375,   375,   375,  1597,   273,
+     273,  1836,  1836,   147,   147,   147,   147,   108,   108,   183,
+     461,   461,    30,    30,    -8,    -8,    -8,    -8,  1812,   317,
+     703,  -325,  -325,  -325,    89,  -325,  -325,   591,  -325,   619,
+     619,   619,   591,  -325,   591,   591,   591,   483,  -325,   323,
+     483,   325,  -325,  -325,  -325,   591,   591,  -325,    32,  -325,
+     664,   127,   333,   334,   340,  1161,  1207,  1513,  1555,   401,
+     139,  -325,  -325,  1812,   362,   327,   462,   468,   469,   369,
+     380,   381,   387,   393,   591,   591,   483,   591,   423,   -21,
+    -325,  -325,  -325,   262,    97,   262,  -325,  -325,  -325,  -325,
+    -325,  1253,  1299,  -325,  1636,   281,  -325,  -325,  -325,  -325,
+    -325,   483,   483,   281,  -325,  -325,  -325,  -325
   };
 
   const unsigned char
@@ -2193,377 +2193,369 @@ namespace mana {
   {
        3,   132,    38,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     2,     3,     0,     5,
-       6,     7,     0,    37,    19,    20,     0,     0,    36,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    17,     0,
-       1,     4,     8,   150,   147,     0,    15,    16,     0,     0,
-      30,    24,    24,    24,     3,    10,     0,     0,     0,     0,
-      17,   144,     0,   151,   152,     0,   133,     0,   144,     0,
-       0,    30,    33,     0,     0,     0,     0,     0,    24,     0,
-       0,     0,    17,    13,   150,    17,     0,     0,   145,     0,
-       0,   153,   123,   124,   125,   129,   117,   118,   119,   120,
-     121,   130,   122,     0,     0,     0,     0,     0,     0,     0,
-       0,   148,   108,   115,   116,   149,     0,     0,    29,    31,
-      32,     0,     0,    28,    21,    25,    22,    23,     9,     0,
-      18,    12,     0,     0,   154,   155,   141,   110,   109,     0,
-     111,   112,   103,   104,     0,     0,     0,     0,     0,     0,
+       6,     7,     0,    37,    19,    20,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    17,     0,     1,
+       4,     8,   152,   149,     0,    15,    16,     0,     0,    30,
+      24,    24,    24,     3,    10,     0,     0,     0,     0,    17,
+       0,   146,     0,    36,   153,   154,     0,   133,     0,   146,
+       0,     0,    30,    33,     0,     0,     0,     0,     0,    24,
+       0,     0,     0,    17,    13,   152,    17,     0,     0,   123,
+     124,   125,   129,   117,   118,   119,   120,   121,   130,   122,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   105,   106,     0,     0,     0,
-       0,     0,     0,    26,    27,    14,    35,   146,   142,     0,
-       0,   131,    78,    79,    80,    76,    77,    84,    85,    81,
-      82,    83,     0,    74,    75,   101,   102,    97,    98,   100,
-      99,    93,    94,    92,    95,    96,    86,    87,    88,    89,
-      90,    91,    73,   126,     0,    11,   144,     0,   129,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      70,     0,    67,     0,     0,     0,   141,   114,   113,     0,
-     141,   128,     0,    71,    72,    52,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    70,     0,
+       0,    67,     0,     0,     0,   108,   115,   116,     0,   147,
+       0,     0,   155,   129,   150,   151,     0,     0,    29,    31,
+      32,   137,     0,    28,    21,    25,    22,    23,     9,     0,
+      18,    12,    71,    72,    52,   143,     0,     0,     0,     0,
       56,    57,     0,     0,    50,     0,     0,     0,    49,     0,
-      53,     0,     0,     0,     0,   141,     0,     0,    68,    39,
-      41,    69,   143,   107,     0,     0,     0,     0,     0,     0,
-      51,     0,     0,   129,     0,     0,     0,     0,    54,    55,
-       0,     0,     0,     0,     0,   127,    34,     0,     0,     0,
-       0,    58,     0,     0,     0,     0,    59,     0,     0,     0,
-      60,    61,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    42,     0,    45,    62,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   137,
-     134,   133,   135,    63,    64,    65,    66,    46,     0,     0,
-      43,     0,     0,    44,   138,     0,     0,     0,   140,    47,
-      48,   139
+      53,     0,     0,     0,     0,   143,     0,     0,   110,   109,
+       0,   111,   112,   103,   104,     0,    68,    39,    41,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   105,
+     106,    69,     0,     0,     0,     0,     0,   156,   157,     0,
+       0,     0,     0,    27,    14,   144,     0,     0,     0,     0,
+       0,    51,     0,     0,   129,     0,     0,     0,     0,    54,
+      55,     0,     0,     0,     0,     0,     0,   131,    78,    79,
+      80,    76,    77,    84,    85,    81,    82,    83,     0,    74,
+      75,   101,   102,    97,    98,   100,    99,    93,    94,    92,
+      95,    96,    86,    87,    88,    89,    90,    91,    73,   126,
+       0,    35,   148,    11,   146,   138,    26,   143,   114,     0,
+       0,     0,     0,    58,     0,     0,     0,     0,    59,     0,
+       0,     0,    60,    61,   113,     0,   143,   128,     0,   145,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    42,
+       0,    45,    62,   107,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     139,   127,    34,   137,   133,   137,    63,    64,    65,    66,
+      46,     0,     0,    43,     0,     0,    44,   140,   134,   136,
+     135,     0,     0,     0,   142,    47,    48,   141
   };
 
   const short
   Parser::yypgoto_[] =
   {
-    -250,  -250,     1,  -250,    53,   124,  -250,   -16,  -250,  -250,
-     407,  -250,   -21,     7,  -106,  -249,  -210,   -63,  -250,  -250,
-    -250,   -11,  -124,  -250,   121,  -237,   -65,    -8,  -250,  -250,
-     416,  -250
+    -325,  -325,     3,  -325,   -33,    31,  -325,   -30,  -325,  -325,
+     421,  -325,   -15,    18,   -38,  -125,  -102,   -63,  -325,  -325,
+    -325,   -11,  -110,  -324,  -325,   135,  -141,   -67,    40,  -325,
+    -325,   431,  -325
   };
 
   const short
   Parser::yydefgoto_[] =
   {
-       0,    15,    16,    17,    57,   251,    19,    77,    78,    20,
-      70,    71,    21,    58,   252,   253,   254,   255,   112,   113,
-     114,    23,   334,   358,   359,   189,    87,    24,    25,    44,
-      63,    64
+       0,    15,    16,    17,    56,   130,    19,    78,    79,    20,
+      71,    72,    21,    57,   131,   132,   133,   134,   135,   136,
+     137,    23,   332,   242,   359,   360,   246,   138,    24,    25,
+      43,    64,    65
   };
 
   const short
   Parser::yytable_[] =
   {
-      35,    36,   111,   116,   115,   290,    45,    22,    45,    45,
-     356,   357,    29,    30,    37,   183,    61,  -132,    41,   292,
-      62,    31,  -132,   294,    22,    26,   186,   274,   275,    72,
-      59,   278,   177,   132,   133,    89,    79,    80,    90,    27,
-     137,   138,    73,   140,   141,   142,   143,   144,   312,    32,
-      72,  -132,    59,    88,    33,    81,  -132,    22,    34,    38,
-      88,    22,   125,    73,   122,    54,    55,   184,     1,   178,
-     179,   175,   176,   188,    59,   373,   117,    59,    22,   263,
-     265,   264,   192,   193,   194,   195,   196,   197,   198,   199,
-     200,   201,   202,   203,   204,   205,   206,   207,   208,   209,
+      34,    35,   146,   144,    63,   145,   174,   175,   198,    44,
+     178,    44,  -132,  -132,   357,   358,    44,   232,    22,    26,
+      40,    80,    81,    28,    29,   140,    87,    36,   141,     1,
+       2,    18,     1,     2,    73,    22,    70,    38,     5,   378,
+     379,   380,    30,    75,   263,    76,  -132,  -132,    18,   155,
+     159,   181,   182,   160,   233,   234,    82,    73,   188,   189,
+      27,   191,   192,   193,   194,   152,   195,    22,    53,    54,
+      31,    22,    37,    32,   243,   164,   162,    58,   163,   376,
+     228,    77,    77,    77,    18,    33,   229,   230,   147,    74,
+      22,     1,    60,    39,    61,     1,     2,    41,    62,    58,
+      42,   139,   245,   247,   248,   249,   250,   165,   165,   139,
+      77,    44,    74,   255,   257,   225,   226,   227,   228,    45,
+     261,   262,   245,    58,   229,   230,    58,   235,   236,   239,
+     236,   229,   230,    46,   345,   236,   268,   269,   270,   271,
+     272,   273,   274,   275,   276,   277,   278,   279,   280,   281,
+     282,   283,   284,   285,   286,   287,   288,   289,   290,   291,
+     292,   293,   294,   295,   296,   297,   329,   347,   348,   298,
+      47,   300,     1,     2,   357,   358,     3,     4,     5,     6,
+       7,     8,     9,    48,    10,   344,    11,    12,   220,   221,
+     222,   223,   224,   225,   226,   227,   228,   301,   241,  -137,
+     333,   334,   229,   230,   306,    49,    50,    55,   266,    51,
+      52,    59,    66,    67,    69,   339,   256,    68,   341,    13,
+      14,  -138,  -138,  -138,  -138,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,    83,   328,    84,    85,
+      86,   229,   230,   148,   245,    62,   330,   330,   330,   335,
+     384,   336,   337,   338,   373,   150,   151,   153,   387,   166,
+     154,   156,   343,   245,   221,   222,   223,   224,   225,   226,
+     227,   228,   157,   158,   161,   172,   302,   229,   230,   385,
+     386,   167,    88,   168,    89,    90,    91,    92,     2,   169,
+     170,   371,   372,     5,   374,   171,   173,   176,   331,   331,
+     331,   177,   179,    93,    94,    95,    96,    97,    98,    99,
+     100,   101,   102,   103,   104,   105,   -40,   -40,   106,   107,
+     108,   183,   184,   109,   185,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   196,   186,   119,   120,   187,   190,
+     197,   237,   165,   240,   139,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,   238,   241,   121,   122,   244,   229,   230,   251,
+     123,   124,   125,   253,   252,   126,   127,   258,   264,   128,
+      60,   -40,   129,    88,   265,    89,    90,    91,    92,     2,
+     299,    60,   303,   305,     5,   308,   304,   313,   314,   316,
+     318,   322,   321,   323,    93,    94,    95,    96,    97,    98,
+      99,   100,   101,   102,   103,   104,   105,   324,   326,   106,
+     107,   108,   340,   342,   109,   362,   110,   111,   112,   113,
+     114,   115,   116,   117,   118,   349,   350,   119,   120,  -138,
+    -138,  -138,   351,   209,   356,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,   361,   121,   122,   366,   363,   229,
+     230,   123,   124,   125,   364,   365,   126,   127,   367,   368,
+     128,    60,   -40,   129,    88,   369,    89,    90,    91,    92,
+       2,   370,   375,   149,   377,     5,   142,     0,     0,     0,
+       0,     0,     0,     0,     0,    93,    94,    95,    96,    97,
+      98,    99,   100,   101,   102,   103,   104,   105,     0,     0,
+     106,   107,   108,     0,     0,   109,     0,   110,   111,   112,
+     113,   114,   115,   116,   117,   118,     0,     0,   119,   120,
+      89,    90,    91,   143,   223,   224,   225,   226,   227,   228,
+       0,     0,     0,     0,     0,   229,   230,     0,     0,    93,
+      94,    95,    96,    97,    98,    99,   121,   122,     0,     0,
+       0,     0,   123,   124,   125,     0,     0,   126,   127,     0,
+       0,   128,    60,     0,   129,    89,    90,    91,   254,     2,
+       0,     0,     0,     0,    89,    90,    91,   143,     0,     0,
+       0,     0,     0,     0,    93,    94,    95,    96,    97,    98,
+      99,     0,     0,    93,    94,    95,    96,    97,    98,    99,
+     121,   122,    89,    90,    91,   254,   123,   124,   125,     0,
+       0,   126,   127,     0,     0,   180,     0,     0,   129,     0,
+       0,    93,    94,    95,    96,    97,    98,    99,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   121,   122,     0,     0,     0,
+       0,   123,   124,   125,   121,   122,   126,   127,     0,     0,
+     123,   124,   125,   129,     0,   126,   127,     0,     0,     0,
+       0,     0,   129,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   121,   122,     0,   346,     0,     0,   123,   124,
+     125,     0,     0,   126,   127,     0,     0,     0,     0,     0,
+     129,   199,   200,   201,   202,   203,   204,   205,   206,   207,
+     208,     0,   209,     0,   210,   211,   212,   213,   214,   215,
+     216,   217,   218,   219,   220,   221,   222,   223,   224,   225,
+     226,   227,   228,     0,     0,     0,     0,     0,   229,   230,
+     199,   200,   201,   202,   203,   204,   205,   206,   207,   208,
+       0,   209,     0,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,     0,     0,     0,     0,     0,   229,   230,   199,
+     200,   201,   202,   203,   204,   205,   206,   207,   208,   327,
+     209,     0,   210,   211,   212,   213,   214,   215,   216,   217,
+     218,   219,   220,   221,   222,   223,   224,   225,   226,   227,
+     228,     0,     0,     0,     0,     0,   229,   230,     0,     0,
+       0,     0,     0,     0,     0,   307,   199,   200,   201,   202,
+     203,   204,   205,   206,   207,   208,     0,   209,     0,   210,
+     211,   212,   213,   214,   215,   216,   217,   218,   219,   220,
+     221,   222,   223,   224,   225,   226,   227,   228,     0,     0,
+       0,     0,     0,   229,   230,     0,     0,     0,     0,     0,
+       0,     0,   309,   199,   200,   201,   202,   203,   204,   205,
+     206,   207,   208,     0,   209,     0,   210,   211,   212,   213,
+     214,   215,   216,   217,   218,   219,   220,   221,   222,   223,
+     224,   225,   226,   227,   228,     0,     0,     0,     0,     0,
+     229,   230,     0,     0,     0,     0,     0,     0,     0,   310,
+     199,   200,   201,   202,   203,   204,   205,   206,   207,   208,
+       0,   209,     0,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,     0,     0,     0,     0,     0,   229,   230,     0,
+       0,     0,     0,     0,     0,     0,   311,   199,   200,   201,
+     202,   203,   204,   205,   206,   207,   208,     0,   209,     0,
      210,   211,   212,   213,   214,   215,   216,   217,   218,   219,
-     220,   221,   136,    86,   222,   341,   224,   136,   343,    39,
-       1,     2,    40,   378,    18,   187,     5,    42,   381,    28,
-     174,    74,    43,    75,    45,   129,   175,   176,   130,   180,
-     133,    18,   295,   133,    46,   370,   190,    47,    92,    93,
-      94,   303,     2,   171,   172,   173,   174,   346,   347,    48,
-      28,   262,   175,   176,    49,   379,   380,    96,    97,    98,
-      99,   100,   101,   102,    50,    76,    76,    76,    18,    51,
-     281,   282,   356,   357,   166,   167,   168,   169,   170,   171,
-     172,   173,   174,   188,   335,   336,   293,   188,   175,   176,
-       1,     2,    76,   296,   297,   298,   299,    69,    52,    28,
-       1,     2,    53,   304,   306,    56,    65,    60,    88,    28,
-     310,   311,   188,    66,    67,    84,    68,    82,   103,   104,
-      83,    85,    62,   120,   105,   106,   107,   118,   121,   108,
-     109,   123,   124,   181,   126,   134,   110,   135,   127,   223,
-     128,   131,   225,   136,   332,   332,   332,   337,   182,   338,
-     339,   340,   139,   185,   257,   226,     1,     2,   305,   258,
-       3,     4,     5,     6,     7,     8,     9,   260,    10,   266,
-      11,    12,   167,   168,   169,   170,   171,   172,   173,   174,
-     368,   369,   267,   371,   268,   175,   176,   269,   227,   272,
-      92,    93,    94,   228,     2,   270,   333,   333,   333,     5,
-     273,   271,    28,    13,    14,   276,   277,   279,   288,    96,
-      97,    98,    99,   100,   101,   102,   229,   230,   231,   232,
-     233,   234,   -40,   -40,   235,   236,   237,   283,   289,   238,
-     284,   239,   240,   241,   242,   243,   244,   245,   246,   247,
-     285,   286,   248,   249,  -137,  -137,  -137,   287,   155,   300,
-     156,   157,   158,   159,   160,   161,   162,   163,   164,   165,
-     166,   167,   168,   169,   170,   171,   172,   173,   174,   301,
-     103,   104,   302,   307,   175,   176,   105,   106,   107,   313,
-     314,   108,   109,   315,   316,   250,   182,   -40,   110,   227,
-     321,    92,    93,    94,   228,     2,   322,   324,   326,   329,
-       5,   330,   331,    28,   342,   344,   355,   360,   348,   361,
-      96,    97,    98,    99,   100,   101,   102,   229,   230,   231,
-     232,   233,   234,   362,   349,   235,   236,   237,   350,   363,
-     238,   364,   239,   240,   241,   242,   243,   244,   245,   246,
-     247,   365,   366,   248,   249,   367,   372,   155,  -136,   156,
-     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   170,   171,   172,   173,   174,   119,   374,
-      91,   103,   104,   175,   176,     0,     0,   105,   106,   107,
-       0,     0,   108,   109,     0,     0,   250,   182,   -40,   110,
-     227,     0,    92,    93,    94,   228,     2,     0,     0,     0,
-       0,     5,     0,     0,    28,     0,     0,     0,     0,     0,
-       0,    96,    97,    98,    99,   100,   101,   102,   229,   230,
-     231,   232,   233,   234,     0,     0,   235,   236,   237,     0,
-       0,   238,     0,   239,   240,   241,   242,   243,   244,   245,
-     246,   247,     0,     0,   248,   249,    92,    93,    94,    95,
-     169,   170,   171,   172,   173,   174,     0,     0,     0,     0,
-       0,   175,   176,     0,     0,    96,    97,    98,    99,   100,
-     101,   102,   103,   104,    92,    93,    94,    95,   105,   106,
-     107,     0,     0,   108,   109,     0,     0,   250,   182,     0,
-     110,     0,     0,    96,    97,    98,    99,   100,   101,   102,
-      92,    93,    94,   303,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    96,
-      97,    98,    99,   100,   101,   102,   103,   104,     0,     0,
-       0,     0,   105,   106,   107,     0,     0,   108,   109,     0,
-       0,   280,     0,     0,   110,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,   103,   104,     0,     0,     0,     0,
-     105,   106,   107,     0,     0,   108,   109,     0,     0,     0,
-       0,     0,   110,     0,     0,     0,     0,     0,     0,     0,
-     103,   104,     0,   345,     0,     0,   105,   106,   107,     0,
-       0,   108,   109,     0,     0,     0,     0,     0,   110,   145,
-     146,   147,   148,   149,   150,   151,   152,   153,   154,     0,
-     155,     0,   156,   157,   158,   159,   160,   161,   162,   163,
-     164,   165,   166,   167,   168,   169,   170,   171,   172,   173,
-     174,     0,     0,     0,     0,     0,   175,   176,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,     0,   155,
-       0,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
-       0,     0,     0,     0,     0,   175,   176,   145,   146,   147,
-     148,   149,   150,   151,   152,   153,   154,   261,   155,     0,
-     156,   157,   158,   159,   160,   161,   162,   163,   164,   165,
-     166,   167,   168,   169,   170,   171,   172,   173,   174,     0,
-       0,     0,     0,     0,   175,   176,     0,     0,     0,     0,
-       0,     0,     0,   256,   145,   146,   147,   148,   149,   150,
-     151,   152,   153,   154,     0,   155,     0,   156,   157,   158,
-     159,   160,   161,   162,   163,   164,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,     0,     0,     0,     0,
-       0,   175,   176,     0,     0,     0,     0,     0,     0,     0,
-     317,   145,   146,   147,   148,   149,   150,   151,   152,   153,
-     154,     0,   155,     0,   156,   157,   158,   159,   160,   161,
-     162,   163,   164,   165,   166,   167,   168,   169,   170,   171,
-     172,   173,   174,     0,     0,     0,     0,     0,   175,   176,
-       0,     0,     0,     0,     0,     0,     0,   318,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,     0,   155,
-       0,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
-       0,     0,     0,     0,     0,   175,   176,     0,     0,     0,
-       0,     0,     0,     0,   319,   145,   146,   147,   148,   149,
-     150,   151,   152,   153,   154,     0,   155,     0,   156,   157,
-     158,   159,   160,   161,   162,   163,   164,   165,   166,   167,
-     168,   169,   170,   171,   172,   173,   174,     0,     0,     0,
-       0,     0,   175,   176,     0,     0,     0,     0,     0,     0,
-       0,   320,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,     0,   155,     0,   156,   157,   158,   159,   160,
-     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
-     171,   172,   173,   174,     0,     0,     0,     0,     0,   175,
-     176,     0,     0,     0,     0,     0,     0,   191,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,     0,   155,
-       0,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
-       0,     0,     0,     0,     0,   175,   176,     0,     0,     0,
-       0,     0,     0,   325,   145,   146,   147,   148,   149,   150,
-     151,   152,   153,   154,     0,   155,     0,   156,   157,   158,
-     159,   160,   161,   162,   163,   164,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,     0,     0,     0,     0,
-       0,   175,   176,     0,     0,     0,     0,     0,     0,   327,
-     145,   146,   147,   148,   149,   150,   151,   152,   153,   154,
-       0,   155,     0,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     173,   174,     0,     0,     0,     0,     0,   175,   176,     0,
-       0,     0,     0,     0,     0,   328,   145,   146,   147,   148,
-     149,   150,   151,   152,   153,   154,     0,   155,     0,   156,
-     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   170,   171,   172,   173,   174,     0,     0,
-       0,     0,     0,   175,   176,     0,     0,     0,     0,     0,
-       0,   351,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,     0,   155,     0,   156,   157,   158,   159,   160,
-     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
-     171,   172,   173,   174,     0,     0,     0,     0,     0,   175,
-     176,     0,     0,     0,     0,     0,     0,   352,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,     0,   155,
-       0,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
-       0,     0,     0,     0,     0,   175,   176,     0,     0,     0,
-       0,     0,     0,   375,   145,   146,   147,   148,   149,   150,
-     151,   152,   153,   154,     0,   155,     0,   156,   157,   158,
-     159,   160,   161,   162,   163,   164,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,     0,     0,     0,     0,
-       0,   175,   176,     0,     0,     0,     0,     0,     0,   376,
-     145,   146,   147,   148,   149,   150,   151,   152,   153,   154,
-       0,   155,     0,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     173,   174,     0,     0,     0,     0,     0,   175,   176,     0,
-       0,   291,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,     0,   155,     0,   156,   157,   158,   159,   160,
-     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
-     171,   172,   173,   174,     0,     0,     0,     0,     0,   175,
-     176,     0,     0,   308,   145,   146,   147,   148,   149,   150,
-     151,   152,   153,   154,     0,   155,     0,   156,   157,   158,
-     159,   160,   161,   162,   163,   164,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,     0,     0,     0,     0,
-       0,   175,   176,     0,     0,   309,   145,   146,   147,   148,
-     149,   150,   151,   152,   153,   154,     0,   155,     0,   156,
-     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   170,   171,   172,   173,   174,     0,     0,
-       0,     0,     0,   175,   176,     0,     0,   323,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,     0,   155,
-       0,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
-       0,     0,     0,     0,     0,   175,   176,     0,     0,   353,
-     145,   146,   147,   148,   149,   150,   151,   152,   153,   154,
-       0,   155,     0,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     173,   174,     0,     0,     0,     0,     0,   175,   176,     0,
-       0,   354,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,     0,   155,   259,   156,   157,   158,   159,   160,
-     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
-     171,   172,   173,   174,     0,     0,     0,     0,     0,   175,
-     176,   145,   146,   147,   148,   149,   150,   151,   152,   153,
-     154,     0,   155,   377,   156,   157,   158,   159,   160,   161,
-     162,   163,   164,   165,   166,   167,   168,   169,   170,   171,
-     172,   173,   174,     0,     0,     0,     0,     0,   175,   176,
-     145,   146,   147,   148,   149,   150,   151,   152,   153,   154,
-       0,   155,     0,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     173,   174,     0,     0,     0,     0,     0,   175,   176,  -137,
-    -137,  -137,   148,   149,   150,   151,   152,   153,   154,     0,
-     155,     0,   156,   157,   158,   159,   160,   161,   162,   163,
-     164,   165,   166,   167,   168,   169,   170,   171,   172,   173,
-     174,     0,     0,     0,     0,     0,   175,   176,  -137,  -137,
-     150,   151,   152,   153,   154,     0,   155,     0,   156,   157,
-     158,   159,   160,   161,   162,   163,   164,   165,   166,   167,
-     168,   169,   170,   171,   172,   173,   174,     0,     0,     0,
-       0,     0,   175,   176,  -137,  -137,   152,   153,   154,     0,
-     155,     0,   156,   157,   158,   159,   160,   161,   162,   163,
-     164,   165,   166,   167,   168,   169,   170,   171,   172,   173,
-     174,     0,     0,     0,     0,     0,   175,   176,   158,   159,
-     160,   161,   162,   163,   164,   165,   166,   167,   168,   169,
-     170,   171,   172,   173,   174,     0,     0,     0,     0,     0,
-     175,   176,  -137,  -137,   160,   161,   162,   163,   164,   165,
-     166,   167,   168,   169,   170,   171,   172,   173,   174,     0,
-       0,     0,     0,     0,   175,   176,  -137,  -137,  -137,  -137,
-     164,   165,   166,   167,   168,   169,   170,   171,   172,   173,
-     174,     0,     0,     0,     0,     0,   175,   176
+     220,   221,   222,   223,   224,   225,   226,   227,   228,     0,
+       0,     0,     0,     0,   229,   230,     0,     0,     0,     0,
+       0,     0,     0,   312,   199,   200,   201,   202,   203,   204,
+     205,   206,   207,   208,     0,   209,     0,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,     0,     0,     0,     0,
+       0,   229,   230,     0,     0,     0,     0,     0,     0,   267,
+     199,   200,   201,   202,   203,   204,   205,   206,   207,   208,
+       0,   209,     0,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,     0,     0,     0,     0,     0,   229,   230,     0,
+       0,     0,     0,     0,     0,   317,   199,   200,   201,   202,
+     203,   204,   205,   206,   207,   208,     0,   209,     0,   210,
+     211,   212,   213,   214,   215,   216,   217,   218,   219,   220,
+     221,   222,   223,   224,   225,   226,   227,   228,     0,     0,
+       0,     0,     0,   229,   230,     0,     0,     0,     0,     0,
+       0,   319,   199,   200,   201,   202,   203,   204,   205,   206,
+     207,   208,     0,   209,     0,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,     0,     0,     0,     0,     0,   229,
+     230,     0,     0,     0,     0,     0,     0,   320,   199,   200,
+     201,   202,   203,   204,   205,   206,   207,   208,     0,   209,
+       0,   210,   211,   212,   213,   214,   215,   216,   217,   218,
+     219,   220,   221,   222,   223,   224,   225,   226,   227,   228,
+       0,     0,     0,     0,     0,   229,   230,     0,     0,     0,
+       0,     0,     0,   352,   199,   200,   201,   202,   203,   204,
+     205,   206,   207,   208,     0,   209,     0,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,     0,     0,     0,     0,
+       0,   229,   230,     0,     0,     0,     0,     0,     0,   353,
+     199,   200,   201,   202,   203,   204,   205,   206,   207,   208,
+       0,   209,     0,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,     0,     0,     0,     0,     0,   229,   230,     0,
+       0,     0,     0,     0,     0,   381,   199,   200,   201,   202,
+     203,   204,   205,   206,   207,   208,     0,   209,     0,   210,
+     211,   212,   213,   214,   215,   216,   217,   218,   219,   220,
+     221,   222,   223,   224,   225,   226,   227,   228,     0,     0,
+       0,     0,     0,   229,   230,     0,     0,     0,     0,     0,
+       0,   382,   199,   200,   201,   202,   203,   204,   205,   206,
+     207,   208,     0,   209,     0,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,     0,     0,     0,     0,     0,   229,
+     230,     0,     0,   231,   199,   200,   201,   202,   203,   204,
+     205,   206,   207,   208,     0,   209,     0,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,     0,     0,     0,     0,
+       0,   229,   230,     0,     0,   259,   199,   200,   201,   202,
+     203,   204,   205,   206,   207,   208,     0,   209,     0,   210,
+     211,   212,   213,   214,   215,   216,   217,   218,   219,   220,
+     221,   222,   223,   224,   225,   226,   227,   228,     0,     0,
+       0,     0,     0,   229,   230,     0,     0,   260,   199,   200,
+     201,   202,   203,   204,   205,   206,   207,   208,     0,   209,
+       0,   210,   211,   212,   213,   214,   215,   216,   217,   218,
+     219,   220,   221,   222,   223,   224,   225,   226,   227,   228,
+       0,     0,     0,     0,     0,   229,   230,     0,     0,   315,
+     199,   200,   201,   202,   203,   204,   205,   206,   207,   208,
+       0,   209,     0,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,     0,     0,     0,     0,     0,   229,   230,     0,
+       0,   354,   199,   200,   201,   202,   203,   204,   205,   206,
+     207,   208,     0,   209,     0,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,     0,     0,     0,     0,     0,   229,
+     230,     0,     0,   355,   199,   200,   201,   202,   203,   204,
+     205,   206,   207,   208,     0,   209,   325,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,     0,     0,     0,     0,
+       0,   229,   230,   199,   200,   201,   202,   203,   204,   205,
+     206,   207,   208,     0,   209,   383,   210,   211,   212,   213,
+     214,   215,   216,   217,   218,   219,   220,   221,   222,   223,
+     224,   225,   226,   227,   228,     0,     0,     0,     0,     0,
+     229,   230,   199,   200,   201,   202,   203,   204,   205,   206,
+     207,   208,     0,   209,     0,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,     0,     0,     0,     0,     0,   229,
+     230,  -138,  -138,  -138,   202,   203,   204,   205,   206,   207,
+     208,     0,   209,     0,   210,   211,   212,   213,   214,   215,
+     216,   217,   218,   219,   220,   221,   222,   223,   224,   225,
+     226,   227,   228,     0,     0,     0,     0,     0,   229,   230,
+    -138,  -138,   204,   205,   206,   207,   208,     0,   209,     0,
+     210,   211,   212,   213,   214,   215,   216,   217,   218,   219,
+     220,   221,   222,   223,   224,   225,   226,   227,   228,     0,
+       0,     0,     0,     0,   229,   230,  -138,  -138,   206,   207,
+     208,     0,   209,     0,   210,   211,   212,   213,   214,   215,
+     216,   217,   218,   219,   220,   221,   222,   223,   224,   225,
+     226,   227,   228,     0,     0,     0,     0,     0,   229,   230,
+     209,     0,   210,   211,   212,   213,   214,   215,   216,   217,
+     218,   219,   220,   221,   222,   223,   224,   225,   226,   227,
+     228,     0,     0,     0,     0,     0,   229,   230,  -138,  -138,
+     214,   215,   216,   217,   218,   219,   220,   221,   222,   223,
+     224,   225,   226,   227,   228,     0,     0,     0,     0,     0,
+     229,   230
   };
 
   const short
   Parser::yycheck_[] =
   {
-      11,    12,    65,    68,    67,   254,    40,     0,    40,    40,
-      35,    36,     5,     6,    54,   121,   101,     6,    17,   256,
-     105,     6,     6,   260,    17,     5,   132,   237,   238,    50,
-      38,   241,    67,   102,   103,     3,    52,    53,     6,     5,
-     103,   104,    50,   106,   107,   108,   109,   110,   285,     6,
-      71,    40,    60,    61,     6,    54,    40,    50,     6,    99,
-      68,    54,    78,    71,    75,    99,    98,    98,     6,   104,
-     105,    94,    95,   136,    82,   100,    69,    85,    71,    98,
-      69,   100,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,   155,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     173,   174,   101,    60,   177,   325,   179,   101,   328,     3,
-       6,     7,     0,   372,     0,   133,    12,    98,   377,    15,
-      88,    17,     6,    19,    40,    82,    94,    95,    85,   102,
-     103,    17,   102,   103,    98,   355,   139,    98,     3,     4,
-       5,     6,     7,    85,    86,    87,    88,    40,    41,     6,
-      15,   226,    94,    95,     6,   375,   376,    22,    23,    24,
-      25,    26,    27,    28,    99,    51,    52,    53,    54,    99,
-     243,   244,    35,    36,    80,    81,    82,    83,    84,    85,
-      86,    87,    88,   256,   318,   319,   259,   260,    94,    95,
-       6,     7,    78,   266,   267,   268,   269,    13,    99,    15,
-       6,     7,    99,   276,   277,     3,    67,    99,   226,    15,
-     283,   284,   285,     6,    67,     6,   101,    99,    83,    84,
-     100,    98,   105,    98,    89,    90,    91,   100,     6,    94,
-      95,    98,   100,     6,   100,   106,   101,   106,   100,     6,
-     100,   100,    98,   101,   317,   318,   319,   320,    99,   322,
-     323,   324,   101,   100,   102,   101,     6,     7,   276,   102,
-      10,    11,    12,    13,    14,    15,    16,   101,    18,   101,
-      20,    21,    81,    82,    83,    84,    85,    86,    87,    88,
-     353,   354,   101,   356,   101,    94,    95,   101,     1,     6,
-       3,     4,     5,     6,     7,    98,   317,   318,   319,    12,
-     101,    98,    15,    53,    54,   101,   101,   101,    98,    22,
-      23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,    35,    36,    37,    38,    39,   101,   100,    42,
-     101,    44,    45,    46,    47,    48,    49,    50,    51,    52,
-     101,   101,    55,    56,    64,    65,    66,   101,    68,    98,
-      70,    71,    72,    73,    74,    75,    76,    77,    78,    79,
-      80,    81,    82,    83,    84,    85,    86,    87,    88,   102,
-      83,    84,    51,   102,    94,    95,    89,    90,    91,   102,
-     102,    94,    95,   102,    98,    98,    99,   100,   101,     1,
-      98,     3,     4,     5,     6,     7,   101,    98,    98,   102,
-      12,    98,    98,    15,    99,    98,    43,     6,   102,     6,
-      22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
-      32,    33,    34,     6,   102,    37,    38,    39,   102,    98,
-      42,    98,    44,    45,    46,    47,    48,    49,    50,    51,
-      52,    98,    98,    55,    56,    98,    69,    68,   102,    70,
-      71,    72,    73,    74,    75,    76,    77,    78,    79,    80,
-      81,    82,    83,    84,    85,    86,    87,    88,    71,   358,
-      64,    83,    84,    94,    95,    -1,    -1,    89,    90,    91,
-      -1,    -1,    94,    95,    -1,    -1,    98,    99,   100,   101,
-       1,    -1,     3,     4,     5,     6,     7,    -1,    -1,    -1,
-      -1,    12,    -1,    -1,    15,    -1,    -1,    -1,    -1,    -1,
-      -1,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      31,    32,    33,    34,    -1,    -1,    37,    38,    39,    -1,
-      -1,    42,    -1,    44,    45,    46,    47,    48,    49,    50,
-      51,    52,    -1,    -1,    55,    56,     3,     4,     5,     6,
-      83,    84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,
-      -1,    94,    95,    -1,    -1,    22,    23,    24,    25,    26,
-      27,    28,    83,    84,     3,     4,     5,     6,    89,    90,
-      91,    -1,    -1,    94,    95,    -1,    -1,    98,    99,    -1,
-     101,    -1,    -1,    22,    23,    24,    25,    26,    27,    28,
-       3,     4,     5,     6,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    22,
+      11,    12,    69,    66,    42,    68,   108,   109,   133,    40,
+     112,    40,     6,     6,    35,    36,    40,    67,     0,     5,
+      17,    51,    52,     5,     6,     3,    59,    54,     6,     6,
+       7,     0,     6,     7,    49,    17,    13,     3,    12,   363,
+     364,   365,     6,    17,   185,    19,    40,    40,    17,    79,
+      83,   114,   115,    86,   104,   105,    53,    72,   121,   122,
+       5,   124,   125,   126,   127,    76,   129,    49,    99,    98,
+       6,    53,    99,     6,    98,    69,    98,    37,   100,   100,
+      88,    50,    51,    52,    53,     6,    94,    95,    70,    49,
+      72,     6,    99,     0,   101,     6,     7,    98,   105,    59,
+       6,    61,   165,   166,   167,   168,   169,   101,   101,    69,
+      79,    40,    72,   176,   177,    85,    86,    87,    88,    98,
+     183,   184,   185,    83,    94,    95,    86,   102,   103,   102,
+     103,    94,    95,    98,   102,   103,   199,   200,   201,   202,
+     203,   204,   205,   206,   207,   208,   209,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,   307,    40,    41,   232,
+       6,   234,     6,     7,    35,    36,    10,    11,    12,    13,
+      14,    15,    16,     6,    18,   326,    20,    21,    80,    81,
+      82,    83,    84,    85,    86,    87,    88,   235,   101,   102,
+     310,   311,    94,    95,   242,    99,    99,     3,   190,    99,
+      99,    99,    67,     6,   101,   317,   176,    67,   320,    53,
+      54,    74,    75,    76,    77,    78,    79,    80,    81,    82,
+      83,    84,    85,    86,    87,    88,    99,   304,   100,     6,
+      98,    94,    95,   100,   307,   105,   309,   310,   311,   312,
+     375,   314,   315,   316,   356,    98,     6,    98,   383,   101,
+     100,   100,   325,   326,    81,    82,    83,    84,    85,    86,
+      87,    88,   100,   100,   100,     6,   236,    94,    95,   381,
+     382,   101,     1,   101,     3,     4,     5,     6,     7,   101,
+      98,   354,   355,    12,   357,    98,   101,   101,   309,   310,
+     311,   101,   101,    22,    23,    24,    25,    26,    27,    28,
+      29,    30,    31,    32,    33,    34,    35,    36,    37,    38,
+      39,   101,   101,    42,   101,    44,    45,    46,    47,    48,
+      49,    50,    51,    52,    98,   101,    55,    56,   101,   101,
+     100,   106,   101,     6,   304,    72,    73,    74,    75,    76,
+      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,   106,   101,    83,    84,   100,    94,    95,    98,
+      89,    90,    91,    51,   102,    94,    95,   102,   102,    98,
+      99,   100,   101,     1,   102,     3,     4,     5,     6,     7,
+       6,    99,    98,   102,    12,   102,   101,    98,   101,    98,
+      98,    98,   102,    98,    22,    23,    24,    25,    26,    27,
+      28,    29,    30,    31,    32,    33,    34,   102,   101,    37,
+      38,    39,    99,    98,    42,    98,    44,    45,    46,    47,
+      48,    49,    50,    51,    52,   102,   102,    55,    56,    64,
+      65,    66,   102,    68,    43,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,   102,    83,    84,    98,     6,    94,
+      95,    89,    90,    91,     6,     6,    94,    95,    98,    98,
+      98,    99,   100,   101,     1,    98,     3,     4,     5,     6,
+       7,    98,    69,    72,   359,    12,    65,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    22,    23,    24,    25,    26,
+      27,    28,    29,    30,    31,    32,    33,    34,    -1,    -1,
+      37,    38,    39,    -1,    -1,    42,    -1,    44,    45,    46,
+      47,    48,    49,    50,    51,    52,    -1,    -1,    55,    56,
+       3,     4,     5,     6,    83,    84,    85,    86,    87,    88,
+      -1,    -1,    -1,    -1,    -1,    94,    95,    -1,    -1,    22,
       23,    24,    25,    26,    27,    28,    83,    84,    -1,    -1,
       -1,    -1,    89,    90,    91,    -1,    -1,    94,    95,    -1,
-      -1,    98,    -1,    -1,   101,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    83,    84,    -1,    -1,    -1,    -1,
-      89,    90,    91,    -1,    -1,    94,    95,    -1,    -1,    -1,
+      -1,    98,    99,    -1,   101,     3,     4,     5,     6,     7,
+      -1,    -1,    -1,    -1,     3,     4,     5,     6,    -1,    -1,
+      -1,    -1,    -1,    -1,    22,    23,    24,    25,    26,    27,
+      28,    -1,    -1,    22,    23,    24,    25,    26,    27,    28,
+      83,    84,     3,     4,     5,     6,    89,    90,    91,    -1,
+      -1,    94,    95,    -1,    -1,    98,    -1,    -1,   101,    -1,
+      -1,    22,    23,    24,    25,    26,    27,    28,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    83,    84,    -1,    -1,    -1,
+      -1,    89,    90,    91,    83,    84,    94,    95,    -1,    -1,
+      89,    90,    91,   101,    -1,    94,    95,    -1,    -1,    -1,
       -1,    -1,   101,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      83,    84,    -1,    41,    -1,    -1,    89,    90,    91,    -1,
-      -1,    94,    95,    -1,    -1,    -1,    -1,    -1,   101,    57,
-      58,    59,    60,    61,    62,    63,    64,    65,    66,    -1,
+      -1,    -1,    83,    84,    -1,    41,    -1,    -1,    89,    90,
+      91,    -1,    -1,    94,    95,    -1,    -1,    -1,    -1,    -1,
+     101,    57,    58,    59,    60,    61,    62,    63,    64,    65,
+      66,    -1,    68,    -1,    70,    71,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,    83,    84,    85,
+      86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,
+      57,    58,    59,    60,    61,    62,    63,    64,    65,    66,
+      -1,    68,    -1,    70,    71,    72,    73,    74,    75,    76,
+      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,    57,
+      58,    59,    60,    61,    62,    63,    64,    65,    66,   106,
       68,    -1,    70,    71,    72,    73,    74,    75,    76,    77,
       78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    -1,    -1,    -1,    -1,    -1,    94,    95,    57,    58,
-      59,    60,    61,    62,    63,    64,    65,    66,    -1,    68,
-      -1,    70,    71,    72,    73,    74,    75,    76,    77,    78,
-      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
-      -1,    -1,    -1,    -1,    -1,    94,    95,    57,    58,    59,
-      60,    61,    62,    63,    64,    65,    66,   106,    68,    -1,
+      88,    -1,    -1,    -1,    -1,    -1,    94,    95,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,   103,    57,    58,    59,    60,
+      61,    62,    63,    64,    65,    66,    -1,    68,    -1,    70,
+      71,    72,    73,    74,    75,    76,    77,    78,    79,    80,
+      81,    82,    83,    84,    85,    86,    87,    88,    -1,    -1,
+      -1,    -1,    -1,    94,    95,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,   103,    57,    58,    59,    60,    61,    62,    63,
+      64,    65,    66,    -1,    68,    -1,    70,    71,    72,    73,
+      74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
+      84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,
+      94,    95,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   103,
+      57,    58,    59,    60,    61,    62,    63,    64,    65,    66,
+      -1,    68,    -1,    70,    71,    72,    73,    74,    75,    76,
+      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,   103,    57,    58,    59,
+      60,    61,    62,    63,    64,    65,    66,    -1,    68,    -1,
       70,    71,    72,    73,    74,    75,    76,    77,    78,    79,
       80,    81,    82,    83,    84,    85,    86,    87,    88,    -1,
       -1,    -1,    -1,    -1,    94,    95,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,   103,    57,    58,    59,    60,    61,    62,
-      63,    64,    65,    66,    -1,    68,    -1,    70,    71,    72,
-      73,    74,    75,    76,    77,    78,    79,    80,    81,    82,
-      83,    84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,
-      -1,    94,    95,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-     103,    57,    58,    59,    60,    61,    62,    63,    64,    65,
-      66,    -1,    68,    -1,    70,    71,    72,    73,    74,    75,
-      76,    77,    78,    79,    80,    81,    82,    83,    84,    85,
-      86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,   103,    57,    58,
-      59,    60,    61,    62,    63,    64,    65,    66,    -1,    68,
-      -1,    70,    71,    72,    73,    74,    75,    76,    77,    78,
-      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
-      -1,    -1,    -1,    -1,    -1,    94,    95,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,   103,    57,    58,    59,    60,    61,
-      62,    63,    64,    65,    66,    -1,    68,    -1,    70,    71,
-      72,    73,    74,    75,    76,    77,    78,    79,    80,    81,
-      82,    83,    84,    85,    86,    87,    88,    -1,    -1,    -1,
-      -1,    -1,    94,    95,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,   103,    57,    58,    59,    60,    61,    62,    63,    64,
-      65,    66,    -1,    68,    -1,    70,    71,    72,    73,    74,
-      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
-      85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,
-      95,    -1,    -1,    -1,    -1,    -1,    -1,   102,    57,    58,
-      59,    60,    61,    62,    63,    64,    65,    66,    -1,    68,
-      -1,    70,    71,    72,    73,    74,    75,    76,    77,    78,
-      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
-      -1,    -1,    -1,    -1,    -1,    94,    95,    -1,    -1,    -1,
-      -1,    -1,    -1,   102,    57,    58,    59,    60,    61,    62,
       63,    64,    65,    66,    -1,    68,    -1,    70,    71,    72,
       73,    74,    75,    76,    77,    78,    79,    80,    81,    82,
       83,    84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,
@@ -2595,7 +2587,12 @@ namespace mana {
       -1,    68,    -1,    70,    71,    72,    73,    74,    75,    76,
       77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
       87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,    -1,
-      -1,    98,    57,    58,    59,    60,    61,    62,    63,    64,
+      -1,    -1,    -1,    -1,    -1,   102,    57,    58,    59,    60,
+      61,    62,    63,    64,    65,    66,    -1,    68,    -1,    70,
+      71,    72,    73,    74,    75,    76,    77,    78,    79,    80,
+      81,    82,    83,    84,    85,    86,    87,    88,    -1,    -1,
+      -1,    -1,    -1,    94,    95,    -1,    -1,    -1,    -1,    -1,
+      -1,   102,    57,    58,    59,    60,    61,    62,    63,    64,
       65,    66,    -1,    68,    -1,    70,    71,    72,    73,    74,
       75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
       85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,
@@ -2617,35 +2614,38 @@ namespace mana {
       77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
       87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,    -1,
       -1,    98,    57,    58,    59,    60,    61,    62,    63,    64,
-      65,    66,    -1,    68,    69,    70,    71,    72,    73,    74,
+      65,    66,    -1,    68,    -1,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,
+      95,    -1,    -1,    98,    57,    58,    59,    60,    61,    62,
+      63,    64,    65,    66,    -1,    68,    69,    70,    71,    72,
+      73,    74,    75,    76,    77,    78,    79,    80,    81,    82,
+      83,    84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,
+      -1,    94,    95,    57,    58,    59,    60,    61,    62,    63,
+      64,    65,    66,    -1,    68,    69,    70,    71,    72,    73,
+      74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
+      84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,
+      94,    95,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    -1,    68,    -1,    70,    71,    72,    73,    74,
       75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
       85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,
       95,    57,    58,    59,    60,    61,    62,    63,    64,    65,
-      66,    -1,    68,    69,    70,    71,    72,    73,    74,    75,
+      66,    -1,    68,    -1,    70,    71,    72,    73,    74,    75,
       76,    77,    78,    79,    80,    81,    82,    83,    84,    85,
       86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,
-      57,    58,    59,    60,    61,    62,    63,    64,    65,    66,
-      -1,    68,    -1,    70,    71,    72,    73,    74,    75,    76,
-      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
-      87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,    57,
-      58,    59,    60,    61,    62,    63,    64,    65,    66,    -1,
-      68,    -1,    70,    71,    72,    73,    74,    75,    76,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    -1,    -1,    -1,    -1,    -1,    94,    95,    60,    61,
-      62,    63,    64,    65,    66,    -1,    68,    -1,    70,    71,
-      72,    73,    74,    75,    76,    77,    78,    79,    80,    81,
-      82,    83,    84,    85,    86,    87,    88,    -1,    -1,    -1,
-      -1,    -1,    94,    95,    62,    63,    64,    65,    66,    -1,
+      60,    61,    62,    63,    64,    65,    66,    -1,    68,    -1,
+      70,    71,    72,    73,    74,    75,    76,    77,    78,    79,
+      80,    81,    82,    83,    84,    85,    86,    87,    88,    -1,
+      -1,    -1,    -1,    -1,    94,    95,    62,    63,    64,    65,
+      66,    -1,    68,    -1,    70,    71,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,    83,    84,    85,
+      86,    87,    88,    -1,    -1,    -1,    -1,    -1,    94,    95,
       68,    -1,    70,    71,    72,    73,    74,    75,    76,    77,
       78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
       88,    -1,    -1,    -1,    -1,    -1,    94,    95,    72,    73,
       74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
       84,    85,    86,    87,    88,    -1,    -1,    -1,    -1,    -1,
-      94,    95,    72,    73,    74,    75,    76,    77,    78,    79,
-      80,    81,    82,    83,    84,    85,    86,    87,    88,    -1,
-      -1,    -1,    -1,    -1,    94,    95,    74,    75,    76,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    -1,    -1,    -1,    -1,    -1,    94,    95
+      94,    95
   };
 
   const unsigned char
@@ -2653,43 +2653,43 @@ namespace mana {
   {
        0,     6,     7,    10,    11,    12,    13,    14,    15,    16,
       18,    20,    21,    53,    54,   108,   109,   110,   112,   113,
-     116,   119,   120,   128,   134,   135,     5,     5,    15,   120,
-     120,     6,     6,     6,     6,   128,   128,    54,    99,     3,
-       0,   109,    98,     6,   136,    40,    98,    98,     6,     6,
-      99,    99,    99,    99,    99,    98,     3,   111,   120,   134,
-      99,   101,   105,   137,   138,    67,     6,    67,   101,    13,
-     117,   118,   119,   134,    17,    19,   112,   114,   115,   114,
-     114,   109,    99,   100,     6,    98,   111,   133,   134,     3,
-       6,   137,     3,     4,     5,     6,    22,    23,    24,    25,
-      26,    27,    28,    83,    84,    89,    90,    91,    94,    95,
-     101,   124,   125,   126,   127,   124,   133,   120,   100,   117,
+     116,   119,   120,   128,   135,   136,     5,     5,   120,   120,
+       6,     6,     6,     6,   128,   128,    54,    99,     3,     0,
+     109,    98,     6,   137,    40,    98,    98,     6,     6,    99,
+      99,    99,    99,    99,    98,     3,   111,   120,   135,    99,
+      99,   101,   105,   121,   138,   139,    67,     6,    67,   101,
+      13,   117,   118,   119,   135,    17,    19,   112,   114,   115,
+     114,   114,   109,    99,   100,     6,    98,   111,     1,     3,
+       4,     5,     6,    22,    23,    24,    25,    26,    27,    28,
+      29,    30,    31,    32,    33,    34,    37,    38,    39,    42,
+      44,    45,    46,    47,    48,    49,    50,    51,    52,    55,
+      56,    83,    84,    89,    90,    91,    94,    95,    98,   101,
+     112,   121,   122,   123,   124,   125,   126,   127,   134,   135,
+       3,     6,   138,     6,   124,   124,   134,   120,   100,   117,
       98,     6,   128,    98,   100,   114,   100,   100,   100,   111,
-     111,   100,   102,   103,   106,   106,   101,   124,   124,   101,
-     124,   124,   124,   124,   124,    57,    58,    59,    60,    61,
-      62,    63,    64,    65,    66,    68,    70,    71,    72,    73,
-      74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
-      84,    85,    86,    87,    88,    94,    95,    67,   104,   105,
-     102,     6,    99,   121,    98,   100,   121,   134,   124,   132,
-     120,   102,   124,   124,   124,   124,   124,   124,   124,   124,
-     124,   124,   124,   124,   124,   124,   124,   124,   124,   124,
-     124,   124,   124,   124,   124,   124,   124,   124,   124,   124,
-     124,   124,   124,     6,   124,    98,   101,     1,     6,    29,
-      30,    31,    32,    33,    34,    37,    38,    39,    42,    44,
-      45,    46,    47,    48,    49,    50,    51,    52,    55,    56,
-      98,   112,   121,   122,   123,   124,   103,   102,   102,    69,
-     101,   106,   133,    98,   100,    69,   101,   101,   101,   101,
+     111,   100,    98,   100,    69,   101,   101,   101,   101,   101,
       98,    98,     6,   101,   123,   123,   101,   101,   123,   101,
-      98,   124,   124,   101,   101,   101,   101,   101,    98,   100,
-     122,    98,   132,   124,   132,   102,   124,   124,   124,   124,
-      98,   102,    51,     6,   124,   134,   124,   102,    98,    98,
-     124,   124,   132,   102,   102,   102,    98,   103,   103,   103,
-     103,    98,   101,    98,    98,   102,    98,   102,   102,   102,
-      98,    98,   124,   128,   129,   129,   129,   124,   124,   124,
-     124,   123,    99,   123,    98,    41,    40,    41,   102,   102,
-     102,   102,   102,    98,    98,    43,    35,    36,   130,   131,
-       6,     6,     6,    98,    98,    98,    98,    98,   124,   124,
-     123,   124,    69,   100,   131,   102,   102,    69,   122,   123,
-     123,   122
+      98,   124,   124,   101,   101,   101,   101,   101,   124,   124,
+     101,   124,   124,   124,   124,   124,    98,   100,   122,    57,
+      58,    59,    60,    61,    62,    63,    64,    65,    66,    68,
+      70,    71,    72,    73,    74,    75,    76,    77,    78,    79,
+      80,    81,    82,    83,    84,    85,    86,    87,    88,    94,
+      95,    98,    67,   104,   105,   102,   103,   106,   106,   102,
+       6,   101,   130,    98,   100,   124,   133,   124,   124,   124,
+     124,    98,   102,    51,     6,   124,   135,   124,   102,    98,
+      98,   124,   124,   133,   102,   102,   120,   102,   124,   124,
+     124,   124,   124,   124,   124,   124,   124,   124,   124,   124,
+     124,   124,   124,   124,   124,   124,   124,   124,   124,   124,
+     124,   124,   124,   124,   124,   124,   124,   124,   124,     6,
+     124,   121,   135,    98,   101,   102,   121,   103,   102,   103,
+     103,   103,   103,    98,   101,    98,    98,   102,    98,   102,
+     102,   102,    98,    98,   102,    69,   101,   106,   134,   133,
+     124,   128,   129,   129,   129,   124,   124,   124,   124,   123,
+      99,   123,    98,   124,   133,   102,    41,    40,    41,   102,
+     102,   102,   102,   102,    98,    98,    43,    35,    36,   131,
+     132,   102,    98,     6,     6,     6,    98,    98,    98,    98,
+      98,   124,   124,   123,   124,    69,   100,   132,   130,   130,
+     130,   102,   102,    69,   122,   123,   123,   122
   };
 
   const unsigned char
@@ -2698,7 +2698,7 @@ namespace mana {
        0,   107,   108,   109,   109,   110,   110,   110,   110,   110,
      110,   110,   110,   110,   110,   110,   110,   111,   111,   112,
      112,   113,   113,   113,   114,   114,   115,   115,   115,   116,
-     117,   117,   118,   118,   118,   119,   120,   120,   120,   121,
+     117,   117,   118,   118,   118,   119,   119,   120,   120,   121,
      122,   122,   123,   123,   123,   123,   123,   123,   123,   123,
      123,   123,   123,   123,   123,   123,   123,   123,   123,   123,
      123,   123,   123,   123,   123,   123,   123,   123,   123,   123,
@@ -2709,8 +2709,8 @@ namespace mana {
      125,   125,   125,   125,   125,   125,   125,   126,   126,   126,
      126,   126,   126,   126,   126,   126,   127,   127,   127,   127,
      127,   127,   128,   128,   129,   129,   129,   130,   130,   131,
-     131,   132,   132,   132,   133,   133,   133,   134,   134,   135,
-     136,   136,   137,   137,   138,   138
+     131,   132,   132,   133,   133,   133,   134,   134,   134,   135,
+     135,   136,   137,   137,   138,   138,   139,   139
   };
 
   const signed char
@@ -2718,8 +2718,8 @@ namespace mana {
   {
        0,     2,     1,     0,     2,     1,     1,     1,     2,     5,
        3,     7,     5,     4,     6,     3,     3,     0,     3,     1,
-       1,     5,     5,     5,     0,     2,     3,     3,     2,     5,
-       0,     2,     2,     1,     7,     6,     1,     1,     1,     3,
+       1,     5,     5,     5,     0,     2,     4,     3,     2,     5,
+       0,     2,     2,     1,     7,     6,     3,     1,     1,     3,
        0,     2,     5,     7,     7,     5,     7,     9,     9,     2,
        2,     3,     2,     2,     3,     3,     2,     2,     4,     4,
        4,     4,     5,     7,     7,     7,     7,     1,     2,     2,
@@ -2729,9 +2729,9 @@ namespace mana {
        3,     3,     3,     2,     2,     2,     2,     5,     1,     2,
        2,     2,     2,     4,     4,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     3,     6,     4,     1,
-       1,     3,     1,     3,     3,     3,     3,     1,     2,     4,
-       3,     0,     1,     3,     0,     1,     3,     2,     4,     5,
-       1,     2,     1,     2,     3,     3
+       1,     3,     1,     3,     4,     4,     4,     0,     2,     1,
+       2,     4,     3,     0,     1,     3,     0,     1,     3,     2,
+       4,     5,     1,     2,     1,     2,     3,     3
   };
 
 
@@ -2760,8 +2760,8 @@ namespace mana {
   "declaration", "actor", "actions", "action", "struct", "struct_members",
   "struct_member", "function", "variable_type", "block", "statements",
   "statement", "expression", "primary", "constant", "left_hand",
-  "qualified_name", "action_ref", "cases", "case", "arg_calls",
-  "arg_decls", "variable_decl", "const_decl", "declarator",
+  "qualified_name", "action_ref", "optional_empty_parens", "cases", "case",
+  "arg_calls", "arg_decls", "variable_decl", "const_decl", "declarator",
   "variable_sizes", "variable_size", YY_NULLPTR
   };
 #endif
@@ -2774,7 +2774,7 @@ namespace mana {
        0,   120,   120,   137,   138,   142,   143,   144,   145,   146,
      148,   151,   154,   156,   158,   161,   163,   169,   170,   174,
      175,   178,   180,   182,   187,   188,   192,   194,   196,   199,
-     204,   205,   209,   210,   211,   215,   219,   221,   223,   227,
+     204,   205,   209,   210,   211,   215,   217,   221,   223,   227,
      232,   233,   236,   238,   240,   242,   244,   246,   248,   250,
      252,   254,   256,   258,   260,   262,   264,   266,   268,   270,
      272,   274,   276,   278,   280,   282,   284,   286,   287,   288,
@@ -2784,9 +2784,9 @@ namespace mana {
      351,   353,   355,   357,   359,   361,   363,   365,   367,   370,
      372,   374,   376,   378,   380,   382,   383,   386,   388,   390,
      392,   394,   396,   398,   400,   402,   406,   408,   410,   412,
-     414,   416,   420,   422,   426,   431,   436,   452,   453,   456,
-     458,   463,   464,   466,   471,   472,   474,   479,   481,   486,
-     490,   492,   496,   497,   500,   502
+     414,   416,   420,   422,   426,   431,   436,   453,   454,   457,
+     458,   461,   463,   468,   469,   471,   476,   477,   479,   484,
+     486,   491,   495,   497,   501,   502,   505,   507
   };
 
   void
@@ -2871,11 +2871,11 @@ namespace mana {
       return symbol_kind::S_YYUNDEF;
   }
 
-#line 19 "Parser.yy"
+#line 19 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 } // mana
-#line 2877 "Parser.cpp"
+#line 2877 "/home/runner/work/Mana/Mana/build/generated/Parser.cpp"
 
-#line 505 "Parser.yy"
+#line 510 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 
 
 #include "ParserDefinition.inl"

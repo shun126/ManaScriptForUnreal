@@ -79,6 +79,11 @@ public class ManaScriptCompiler : ModuleRules
 		PrivateIncludePaths.Add(
 			Path.Combine(ModuleDirectory, "..", "ManaScriptRuntime", "Public", "Mana", "runner"));
 
+		// 取り込んだコンパイラは bison の生成物を <Parser.hpp> と山括弧で参照します。
+		// 山括弧形式は読み込む側のディレクトリを探さないため、compiler 自身を渡します。
+		PrivateIncludePaths.Add(
+			Path.Combine(ModuleDirectory, "Private", "Mana", "compiler"));
+
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{

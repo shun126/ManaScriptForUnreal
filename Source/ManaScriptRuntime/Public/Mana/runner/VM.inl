@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 mana (library)
 
 \author	Shun Moriya
@@ -7,6 +7,9 @@ mana (library)
 
 #pragma once
 #include "Plugin.h"
+#include <cmath>
+#include <limits>
+#include <stdexcept>
 
 namespace mana
 {
@@ -163,7 +166,7 @@ namespace mana
 			}
 		}
 
-		// ・ｽO・ｽ・ｽ・ｽ[・ｽo・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾑス・ｽ^・ｽe・ｽB・ｽb・ｽN・ｽﾏ撰ｿｽ・ｽﾌ茨ｿｽ・ｽ・ｽm・ｽﾛゑｿｽ・ｽﾜゑｿｽ
+		// グローバル変数と静的変数のメモリを確保します
 		mGlobalVariables.Allocate(mFileHeader->mSizeOfGlobalMemory);
 		mStaticVariables.Allocate(mFileHeader->mSizeOfStaticMemory);
 
@@ -244,50 +247,58 @@ namespace mana
 			}
 		}
 
-		// ・ｽt・ｽ・ｽ・ｽO・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ
-		mFlag.set(Flag::InitializeActionRunning);
+		// プログラムの初期化とシステムリクエストのフラグを設定します
 		mFlag.set(Flag::Initialized);
 		mFlag.set(Flag::EnableSystemRequest);
 
-		// ・ｽS・ｽA・ｽN・ｽ^・ｽ[・ｽ・ｽ init・ｽ・ｽmain ・ｽA・ｽN・ｽV・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽs
+		// 各 Actor の実行状態をリセットしてから初期化処理と main を要求します
 		Restart();
 
 		// Initialize global variables
 		if (Request(1, "__init_globals", "__init", nullptr))
 		{
 			Execute([]() {});
+
+			// グローバル変数の初期化で進んだ時間を戻し、ロード直後の時間を 0 にします
+			mFrameCounter = 0;
+			mElapsedSeconds = 0;
+			mDeltaSeconds = 0;
+			mLastRun = std::chrono::steady_clock::now();
 		}
 
-		RequestAll(1, "init", nullptr);
+		// Queue main before starting each Actor's init at the highest priority.
 		RequestAll(0, "main", nullptr);
+		RequestAll(std::numeric_limits<int32_t>::max(), "init", nullptr);
 	}
 
 	inline void VM::UnloadProgram()
 	{
-		/* ・ｽX・ｽN・ｽ・ｽ・ｽv・ｽg・ｽﾅ確・ｽﾛゑｿｽ・ｽ・ｽ・ｽ・ｽ・ｽ\・ｽ[・ｽX・ｽﾌ開・ｽ・ｽ */
+		/* スクリプトで確保したリソースの解放 */
 		/*
 		GetResource().Clear();
 		*/
 
-		/* ・ｽC・ｽx・ｽ・ｽ・ｽg・ｽ{・ｽb・ｽN・ｽX・ｽﾌ開・ｽ・ｽ */
+		/* イベントボックスの解放 */
 		/*
 		DestroyIntersections();
 		*/
 
-		// ・ｽﾏ撰ｿｽ・ｽﾌ擾ｿｽ・ｽ・ｽ・ｽ・ｽ
-		mFlag.reset(Flag::InitializeActionRunning);
-		mFlag.reset(Flag::InitializeActionFinished);
+		// 実行状態と Actor の情報を初期化します
 		mFlag.reset(Flag::Initialized);
 		mFlag.reset(Flag::EnableSystemRequest);
 
+		mFrameCounter = 0;
+		mElapsedSeconds = 0;
+		mDeltaSeconds = 0;
+		mLastRun = std::chrono::steady_clock::now();
 		mActors.clear();
 		mPhantoms.clear();
 
-		// ・ｽﾏ撰ｿｽ・ｽﾌ茨ｿｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾜゑｿｽ
+		// グローバル変数と静的変数のメモリを解放します
 		mGlobalVariables.Reset();
 		mStaticVariables.Reset();
 
-		// ・ｽv・ｽ・ｽ・ｽO・ｽ・ｽ・ｽ・ｽ・ｽﾌ開・ｽ・ｽ
+		// プログラムを解放し、参照先をクリアします
 		mProgram.reset();
 		mFileHeader = nullptr;
 		mConstantPool = nullptr;
@@ -300,9 +311,10 @@ namespace mana
 		{
 			actor.second->Restart();
 		}
-		mFlag.reset(Flag::InitializeActionRunning);
-		mFlag.reset(Flag::InitializeActionFinished);
 		mFrameCounter = 0;
+		mElapsedSeconds = 0;
+		mDeltaSeconds = 0;
+		mLastRun = std::chrono::steady_clock::now();
 	}
 
 	inline bool VM::RunActor(const std::shared_ptr<Actor>& actor)
@@ -329,6 +341,31 @@ namespace mana
 
 	inline bool VM::Run()
 	{
+		return Run(GetSecondsSinceLastRun());
+	}
+
+	inline double VM::GetSecondsSinceLastRun() const
+	{
+		return std::chrono::duration<double>(std::chrono::steady_clock::now() - mLastRun).count();
+	}
+
+	inline void VM::AdvanceTime(const double deltaSeconds)
+	{
+		if (!std::isfinite(deltaSeconds) || deltaSeconds < 0 || !std::isfinite(mElapsedSeconds + deltaSeconds))
+			throw std::invalid_argument("VM delta seconds must be finite and nonnegative");
+		mLastRun = std::chrono::steady_clock::now();
+		mDeltaSeconds = deltaSeconds;
+		mElapsedSeconds += deltaSeconds;
+	}
+
+	inline float_t VM::GetDeltaTime() const
+	{
+		return static_cast<float_t>(mDeltaSeconds);
+	}
+
+	inline bool VM::Run(double deltaSeconds)
+	{
+		AdvanceTime(deltaSeconds);
 		bool running = false;
 
 		mFlag.set(Flag::FrameChanged);
@@ -340,13 +377,13 @@ namespace mana
 		}
 
 		mFlag.reset(Flag::FrameChanged);
-		while (mFlag[Flag::FrameChanged])
+		while (mFlag[Flag::Requested])
 		{
 			mFlag.reset(Flag::Requested);
 
 			for (auto& actor : mActors)
 			{
-				if (actor.second->mFlag[Flag::Requested])
+				if (actor.second->mFlag[static_cast<uint8_t>(Actor::Flag::Requested)])
 				{
 					running |= RunActor(actor.second);
 				}
@@ -354,11 +391,6 @@ namespace mana
 		}
 		mFlag.set(Flag::FrameChanged);
 
-		if (mFlag[Flag::InitializeActionRunning] && !running)
-		{
-			mFlag.set(Flag::InitializeActionFinished);
-			mFlag.reset(Flag::InitializeActionRunning);
-		}
 		++mFrameCounter;
 
 		return running;
@@ -573,16 +605,6 @@ namespace mana
 		int32_t opecode = mInstructionPool[address];
 		MANA_ASSERT(opecode >= 0 && opecode < IntermediateLanguageSize);
 		return opecode;
-	}
-
-	inline bool VM::IsInInitAction() const
-	{
-		return mFlag[Flag::InitializeActionRunning];
-	}
-
-	inline bool VM::IsFinishInitAction() const
-	{
-		return mFlag[Flag::InitializeActionFinished];
 	}
 
 	inline void VM::SetSystemRequest(const bool enable)

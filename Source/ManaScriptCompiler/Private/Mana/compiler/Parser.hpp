@@ -32,7 +32,7 @@
 
 
 /**
- ** \file Parser.hpp
+ ** \file /home/runner/work/Mana/Mana/build/generated/Parser.hpp
  ** Define the mana::parser class.
  */
 
@@ -42,10 +42,10 @@
 // especially those whose name start with YY_ or yy_.  They are
 // private implementation details that can be changed or removed.
 
-#ifndef YY_YY_PARSER_HPP_INCLUDED
-# define YY_YY_PARSER_HPP_INCLUDED
+#ifndef YY_YY_HOME_RUNNER_WORK_MANA_MANA_BUILD_GENERATED_PARSER_HPP_INCLUDED
+# define YY_YY_HOME_RUNNER_WORK_MANA_MANA_BUILD_GENERATED_PARSER_HPP_INCLUDED
 // "%code requires" blocks.
-#line 25 "Parser.yy"
+#line 25 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 
 	#include "../runner/common/Setup.h"
 	#include "SyntaxNode.h"
@@ -62,7 +62,7 @@
 		};
 	}
 
-#line 66 "Parser.hpp"
+#line 66 "/home/runner/work/Mana/Mana/build/generated/Parser.hpp"
 
 
 # include <cstdlib> // std::abort
@@ -196,9 +196,9 @@
 # define YYDEBUG 0
 #endif
 
-#line 19 "Parser.yy"
+#line 19 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 namespace mana {
-#line 202 "Parser.hpp"
+#line 202 "/home/runner/work/Mana/Mana/build/generated/Parser.hpp"
 
 
 
@@ -711,15 +711,16 @@ namespace mana {
         S_left_hand = 127,                       // left_hand
         S_qualified_name = 128,                  // qualified_name
         S_action_ref = 129,                      // action_ref
-        S_cases = 130,                           // cases
-        S_case = 131,                            // case
-        S_arg_calls = 132,                       // arg_calls
-        S_arg_decls = 133,                       // arg_decls
-        S_variable_decl = 134,                   // variable_decl
-        S_const_decl = 135,                      // const_decl
-        S_declarator = 136,                      // declarator
-        S_variable_sizes = 137,                  // variable_sizes
-        S_variable_size = 138                    // variable_size
+        S_optional_empty_parens = 130,           // optional_empty_parens
+        S_cases = 131,                           // cases
+        S_case = 132,                            // case
+        S_arg_calls = 133,                       // arg_calls
+        S_arg_decls = 134,                       // arg_decls
+        S_variable_decl = 135,                   // variable_decl
+        S_const_decl = 136,                      // const_decl
+        S_declarator = 137,                      // declarator
+        S_variable_sizes = 138,                  // variable_sizes
+        S_variable_size = 139                    // variable_size
       };
     };
 
@@ -2704,9 +2705,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1937,     ///< Last index in yytable_.
-      yynnts_ = 32,  ///< Number of nonterminal symbols.
-      yyfinal_ = 40 ///< Termination state number.
+      yylast_ = 1931,     ///< Last index in yytable_.
+      yynnts_ = 33,  ///< Number of nonterminal symbols.
+      yyfinal_ = 39 ///< Termination state number.
     };
 
 
@@ -2716,11 +2717,11 @@ switch (yykind)
   };
 
 
-#line 19 "Parser.yy"
+#line 19 "/home/runner/work/Mana/Mana/compiler/Parser.yy"
 } // mana
-#line 2722 "Parser.hpp"
+#line 2723 "/home/runner/work/Mana/Mana/build/generated/Parser.hpp"
 
 
 
 
-#endif // !YY_YY_PARSER_HPP_INCLUDED
+#endif // !YY_YY_HOME_RUNNER_WORK_MANA_MANA_BUILD_GENERATED_PARSER_HPP_INCLUDED

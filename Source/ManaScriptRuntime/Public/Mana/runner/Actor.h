@@ -25,6 +25,7 @@ namespace mana
 	class Actor : Noncopyable, public std::enable_shared_from_this<Actor>
 	{
 		friend class VM;
+		friend struct ActorTestAccess; // Defined only by the embedding tests.
 
 	public:
 		//! Constructor
@@ -39,8 +40,10 @@ namespace mana
 		std::shared_ptr<Actor> Clone() const;
 		
 		bool Run();
+		//! アクションを要求し、完了するまで VM 全体を実行して待ちます（他のアクターも動きます）
 		bool SyncCall(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender);
-		bool AsyncCall(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender);
+		//! アクションを要求し、完了するまでこのアクターだけを実行します（他のアクターは止まります）
+		bool CallExclusive(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender);
 		
 		bool Request(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender);
 		void Rollback(const int32_t priority);
@@ -79,6 +82,7 @@ namespace mana
 		[[nodiscard]] bool IsCommandRepeat() const;
 		[[nodiscard]] bool IsRunning() const;
 		void Repeat(const bool initialComplete);
+		void Delay(double seconds);
 		void Again();
 		void Halt();
 		void Stop();
@@ -112,6 +116,7 @@ namespace mana
 			uint32_t mReturnAddress = Nil;			//!< リターンアドレス
 			address_t mFramePointer = Nil;			//!< フレームポインタ
 			address_t mStackPointer = Nil;			//!< スタックポインタ
+			double mDelayDeadline = 0;
 			std::bitset<8> mFlag = 0;
 #if MANA_BUILD_TARGET < MANA_BUILD_RELEASE
 			std::string mActionName;				//!< 実行中のアクション名
@@ -123,7 +128,7 @@ namespace mana
 				IsInSyncCall,	//!< 同期実行フラグ
 				Repeat,			//!< リピートフラグ
 				Suspend,		//!< サスペンドフラグ
-				Synchronized	//!< 同期フラグ
+				Synchronized,	//!< 同期フラグ
 			};
 		};
 
@@ -136,7 +141,8 @@ namespace mana
 				float_t mFloatValue;				//!< 実数値
 				const char* mStringValue;			//!< 文字列
 				void* mPointerValue;				//!< 構造体
-				Actor* mActorValue;					//!< アクター
+				// 下の定数 ReturnValue::Actor と同名なので、修飾してクラスを指します
+				mana::Actor* mActorValue;			//!< アクター
 			} mValues;
 			int32_t mSize;							//!< サイズ(mPointerValue)
 
@@ -234,7 +240,7 @@ namespace mana
 		static void CommandRollback(const std::shared_ptr<VM>& vm, Actor& self);
 		static void CommandAddInteger(const std::shared_ptr<VM>& vm, Actor& self);
 		static void CommandAddAddress(const std::shared_ptr<VM>& vm, Actor& self);
-		static void CommandAddArrayAddress(const std::shared_ptr<VM>& vm, Actor& self);
+		static void CommandCheckArrayIndex(const std::shared_ptr<VM>& vm, Actor& self);
 		static void CommandAddFloat(const std::shared_ptr<VM>& vm, Actor& self);
 		static void CommandDivideInteger(const std::shared_ptr<VM>& vm, Actor& self);
 		static void CommandDivideFloat(const std::shared_ptr<VM>& vm, Actor& self);
@@ -290,23 +296,12 @@ namespace mana
 	if(P->GetArgumentCount() != I)						\
 		return;											\
 }
-//! initアクション中ならばreturnします
-#define MANA_ASSERT_CANT_CALL_IN_INIT_ACTION(P)			\
-	if((P)->GetVirtualMachine()->IsInInitAction()){		\
-		return;											\
-	}
 #else
 //! 引数の数を調べ、一致しない場合は警告を表示してreturnします
 #define MANA_ASSERT_PARAMETER(P, I)	\
 	if((P)->GetArgumentCount() != (I)){	\
 		 MANA_PRINT({ "ERROR: ", (P)->GetName(), ": function ", (P)->GetFunctionName(), " number of arguments ", std::to_string((P)->GetArgumentCount()), " correct ", std::to_string(I), "\n" });\
 		 return;					\
-	}
-//! initアクション中ならば警告を表示してreturnします
-#define MANA_ASSERT_CANT_CALL_IN_INIT_ACTION(P)			\
-	if((P)->GetVirtualMachine()->IsInInitAction()){		\
-		MANA_PRINT({ "ERROR: ", (P)->GetName(), ": init action ", (P)->GetFunctionName()," can not call\n" });\
-		return;											\
 	}
 #endif
 

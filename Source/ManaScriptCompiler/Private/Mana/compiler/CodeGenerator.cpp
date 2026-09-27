@@ -162,14 +162,18 @@ namespace mana
 	*/
 	void CodeGenerator::Return(const std::shared_ptr<Symbol>& function, const std::shared_ptr<SyntaxNode>& tree)
 	{
+		// return 文のノードは常に渡されるため、戻り値の有無は左ノードで判定します
+		const bool hasValue = tree != nullptr && tree->GetLeftNode() != nullptr;
+
 		// Error check
-		std::shared_ptr<TypeDescriptor> type = function->GetTypeDescriptor();
-		if (type->Is(TypeDescriptor::Id::Void))
+		// 関数シンボルが無い場合（アクション）は戻り値を持ちません
+		std::shared_ptr<TypeDescriptor> type = function ? function->GetTypeDescriptor() : nullptr;
+		if (type == nullptr || type->Is(TypeDescriptor::Id::Void))
 		{
-			if (tree != nullptr)
+			if (hasValue)
 				CompileError("meaningless return value specification");
 		}
-		else if (tree == nullptr)
+		else if (!hasValue)
 		{
 			CompileError("missing return value");
 		}
@@ -198,7 +202,8 @@ namespace mana
 		);
 
 		// 関数を使用したフラグを立てる
-		function->SetUsed(true);
+		if (function)
+			function->SetUsed(true);
 	}
 
 	/*!
@@ -1262,12 +1267,14 @@ DO_RECURSIVE:
 		case SyntaxNode::Id::Array:
 			/* variable[index] */
 			GenerateCode(node->GetRightNode(), true);
+			// 乗算の前に添字を検査します。バイト数へ変換してからでは、
+			// 大きな添字が int_t で桁あふれして検査をすり抜けます。
+			mCodeBuffer->AddOpecodeAndOperand(IntermediateLanguage::CheckArrayIndex,
+				(node->GetLeftNode()->GetTypeDescriptor())->GetArraySize());
 			mCodeBuffer->AddOpecodeAndOperand(IntermediateLanguage::PushSize, (node->GetTypeDescriptor())->GetMemorySize());
 			mCodeBuffer->AddOpecode(IntermediateLanguage::MultiInteger);
 			GenerateCode(node->GetLeftNode(), false);
-			// 実行時に添字を検査する為、配列全体のバイト数を渡します
-			mCodeBuffer->AddOpecodeAndOperand(IntermediateLanguage::AddArrayAddress,
-				(node->GetLeftNode()->GetTypeDescriptor())->GetMemorySize());
+			mCodeBuffer->AddOpecode(IntermediateLanguage::AddAddress);
 			if (enableLoad)
 			{
 				ResolveLoad(node);

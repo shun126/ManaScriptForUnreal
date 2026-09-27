@@ -6,6 +6,7 @@
 
 #include "ManaRuntimeBindings.h"
 
+#include "GameFramework/Actor.h"
 #include "ManaRuntimeVM.h"
 #include "ManaScriptRuntime.h"
 #include "Mana/runner/Actor.h"

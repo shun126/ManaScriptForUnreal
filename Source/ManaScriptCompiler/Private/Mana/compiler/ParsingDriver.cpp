@@ -15,7 +15,7 @@ mana (compiler)
 #include "LocalAddressResolver.h"
 #include "LocalSemanticAnalyzer.h"
 #include "NamespaceRegistry.h"
-#include "Parser.hpp"
+#include <Parser.hpp>
 #include "SymbolFactory.h"
 #include "SyntaxNode.h"
 #include "StringPool.h"
@@ -437,13 +437,6 @@ namespace mana
 	}
 
 	// variable_type
-	std::shared_ptr<SyntaxNode> ParsingDriver::CreateActorTypeDescription()
-	{
-		std::shared_ptr<SyntaxNode> node = std::make_shared<SyntaxNode>(SyntaxNode::Id::TypeDescription);
-		node->Set(GetTypeDescriptorFactory()->Get(TypeDescriptor::Id::Actor));
-		return node;
-	}
-
 	std::shared_ptr<SyntaxNode> ParsingDriver::CreateTypeDescription(const std::string_view& identifier)
 	{
 		std::shared_ptr<SyntaxNode> node = std::make_shared<SyntaxNode>(SyntaxNode::Id::TypeDescription);

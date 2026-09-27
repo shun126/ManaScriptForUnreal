@@ -7,6 +7,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/WeakObjectPtr.h"
+
+#include <memory>
 
 namespace mana
 {

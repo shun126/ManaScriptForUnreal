@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 mana (library)
 
 @author	Shun Moriya
@@ -125,7 +125,7 @@ namespace mana
 			// caluclation
 			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::AddInteger, &CommandAddInteger),
 			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::AddAddress, &CommandAddAddress),
-			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::AddArrayAddress, &CommandAddArrayAddress),
+			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::CheckArrayIndex, &CommandCheckArrayIndex),
 			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::DivideInteger, &CommandDivideInteger),
 			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::MinusInteger, &CommandMinusInteger),
 			MANA_ACTOR_SET_COMMAND(IntermediateLanguage::ModInteger, &CommandModInteger),
@@ -244,7 +244,7 @@ namespace mana
 		return false;
 	}
 
-	inline bool Actor::AsyncCall(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender)
+	inline bool Actor::CallExclusive(const int32_t priority, const char* action, const std::shared_ptr<Actor>& sender)
 	{
 		if (Request(priority, action, sender))
 		{
@@ -252,8 +252,11 @@ namespace mana
 			if (interruptIterator == mInterrupts.end())
 				return false;
 			interruptIterator->second.mFlag.set(static_cast<uint8_t>(Interrupt::Flag::IsInSyncCall));
+			const std::shared_ptr<VM> vm = mVM.lock();
 			while (true)
 			{
+				// VM::Run() を経由しないため、delay が期限に届くよう実時間で時計を進めます
+				vm->AdvanceTime(vm->GetSecondsSinceLastRun());
 				Run();
 				if (mInterruptPriority < priority)
 					return true;
@@ -709,6 +712,22 @@ namespace mana
 		interrupt.mFlag.set(static_cast<uint8_t>(Interrupt::Flag::Suspend));
 	}
 
+	inline void Actor::Delay(double seconds)
+	{
+		if (!std::isfinite(seconds) || seconds < 0)
+			throw std::invalid_argument("delay seconds must be finite and nonnegative");
+		auto& interrupt = mInterrupts.at(mInterruptPriority);
+		const double now = mVM.lock()->GetElapsedSeconds();
+		if (!IsCommandInitialized())
+		{
+			interrupt.mDelayDeadline = now + seconds;
+			if (!std::isfinite(interrupt.mDelayDeadline))
+				throw std::invalid_argument("delay deadline overflow");
+		}
+		if (now < interrupt.mDelayDeadline)
+			Repeat(true);
+	}
+
 	inline void Actor::Again()
 	{
 		mFlag.set(static_cast<uint8_t>(Flag::Requested));
@@ -952,7 +971,7 @@ namespace mana
 	inline void Actor::CommandLoadSelfAddress(const std::shared_ptr<VM>& vm, Actor& self)
 	{
 		uint32_t offset = vm->GetUint32FromMemory(self.mPc + 1);
-		self.mStack.Push(self.mVariable.GetAddressFromBottom<void>(offset));
+		self.mStack.Push(self.mVariable.GetAddressFromTop<void>(offset));
 	}
 
 	inline void Actor::CommandLoadInt8(const std::shared_ptr<VM>&, Actor& self)
@@ -1138,25 +1157,22 @@ namespace mana
 	}
 
 	/*!
-	配列の要素へのアドレスを求めます
+	配列の添字が範囲内か検査します
 
-	オペランドは配列全体のバイト数です。添字が範囲外ならスクリプトエラーに
-	します。範囲外への読み書きは他の変数を壊すため、Releaseでも検査します。
+	オペランドは配列の要素数です。バイト数へ変換する前の添字を検査するため、
+	変換時の桁あふれで検査をすり抜ける事がありません。検査した添字はそのまま
+	残します。範囲外への読み書きは他の変数を壊すため、Releaseでも検査します。
 	*/
-	inline void Actor::CommandAddArrayAddress(const std::shared_ptr<VM>& vm, Actor& self)
+	inline void Actor::CommandCheckArrayIndex(const std::shared_ptr<VM>& vm, Actor& self)
 	{
-		const int_t size = static_cast<int_t>(vm->GetUint32FromMemory(self.mPc + 1));
-		uint8_t* address = static_cast<uint8_t*>(self.mStack.Get<void*>(0));
-		const int_t offset = self.mStack.Get<int_t>(1);
+		const int_t count = static_cast<int_t>(vm->GetUint32FromMemory(self.mPc + 1));
+		const int_t index = self.mStack.Get<int_t>(0);
 
-		if (offset < 0 || offset >= size)
+		if (index < 0 || index >= count)
 		{
-			RaiseScriptError({ "subscript out of range: byte offset ", std::to_string(offset),
-				" is outside the array of ", std::to_string(size), " byte(s)" });
+			RaiseScriptError({ "subscript out of range: index ", std::to_string(index),
+				" is outside the array of ", std::to_string(count), " element(s)" });
 		}
-
-		self.mStack.Remove(1);
-		self.mStack.Set(0, static_cast<void*>(address + offset));
 	}
 
 	inline void Actor::CommandAddFloat(const std::shared_ptr<VM>&, Actor& self)
@@ -1519,9 +1535,10 @@ namespace mana
 		}
 		else
 		{
-			// 戻り値があるなら、スタック操作ができないので強制停止
+			// 戻り値がある未登録の外部関数は処理を継続できないため、
+			// プロセス終了ではなく、VMの例外境界でアクターを停止します。
 			if (self.HasReturnValue(lastPc))
-				std::terminate();
+				RaiseFault(__FILE__, __LINE__, { "native function with return value is not registered: ", functionName });
 		}
 
 		if (self.IsRunning())
